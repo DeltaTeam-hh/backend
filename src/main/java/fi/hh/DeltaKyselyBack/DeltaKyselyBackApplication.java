@@ -14,4 +14,6 @@ public class DeltaKyselyBackApplication {
 
 // Testikommentti!!!!
 
+//Jaritest
+
 // Jonin testi
