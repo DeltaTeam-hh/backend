@@ -38,6 +38,13 @@ public String getKysymysTeksti() {
 public void setKysymysTeksti(String kysymysTeksti) {
     this.kysymysTeksti = kysymysTeksti;
 }
+
+public Kysely getKysely() {
+	return kysely;
+}
+public void setKysely(Kysely kysely) {
+	this.kysely = kysely;
+}
 @Override
 public String toString() {
     return "Kysymys [kysymysId=" + kysymysId + ", kysymysTeksti=" + kysymysTeksti + "]";
