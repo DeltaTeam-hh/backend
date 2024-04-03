@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class KyselyController {
 	
 	@GetMapping("/kysely")
-    public String kysely() {
+    public String kysely(Model model) {
 		return "kysely";
        
     }
