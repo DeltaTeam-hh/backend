@@ -1,4 +1,4 @@
-package DeltaKysely.domain;
+package DeltaKyselyBack.domain;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
