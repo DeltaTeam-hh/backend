@@ -1,8 +1,15 @@
 package DeltaKysely.domain;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 public class Kysymys {
  private Long kysymysId;
  private String kysymysTeksti;
+
+@ManyToOne
+@JoinColumn(name = "kyselyId")
+private Kysely kysely;
 
  public Kysymys() {
     this.kysymysId = null;

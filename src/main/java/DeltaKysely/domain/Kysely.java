@@ -3,28 +3,28 @@ package DeltaKysely.domain;
 import java.util.Date;
 
 public class Kysely {
-private Long id;
+private Long kyselyId;
 private String otsikko;
 private Date pvm;
 
 public Kysely() {
-    this.id = null;
+    this.kyselyId = null;
     this.otsikko = null;
     this.pvm = null;
 }
 
-public Kysely(Long id, String otsikko, Date pvm) {
-    this.id = id;
+public Kysely(Long kyselyId, String otsikko, Date pvm) {
+    this.kyselyId = kyselyId;
     this.otsikko = otsikko;
     this.pvm = pvm;
 }
 
-public Long getId() {
-    return id;
+public Long getKyselyId() {
+    return kyselyId;
 }
 
-public void setId(Long id) {
-    this.id = id;
+public void setKyselyId(Long kyselyId) {
+    this.kyselyId = kyselyId;
 }
 
 public String getOtsikko() {
@@ -45,7 +45,7 @@ public void setPvm(Date pvm) {
 
 @Override
 public String toString() {
-    return "Kysely [id=" + id + ", otsikko=" + otsikko + ", pvm=" + pvm + "]";
+    return "Kysely [kyselyId=" + kyselyId + ", otsikko=" + otsikko + ", pvm=" + pvm + "]";
 }
 
 
