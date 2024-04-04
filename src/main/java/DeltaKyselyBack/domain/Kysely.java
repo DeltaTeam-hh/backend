@@ -21,7 +21,7 @@ public class Kysely {
     private Date pvm;
 
     @OneToMany(mappedBy = "kysely", cascade = CascadeType.ALL)
-    private List<Kysely> kyselyt;
+    private List<Kysymys> kysymykset;
 
     public Kysely() {
         this.kyselyId = null;
@@ -35,11 +35,11 @@ public class Kysely {
         this.pvm = pvm;
     }
 
-    public Long getId() {
+    public Long getKyselyId() {
         return kyselyId;
     }
 
-    public void setId(Long kyselyId) {
+    public void setKyselyId(Long kyselyId) {
         this.kyselyId = kyselyId;
     }
 
@@ -58,8 +58,17 @@ public class Kysely {
     public void setPvm(Date pvm) {
         this.pvm = pvm;
     }
+    
 
-    @Override
+    public List<Kysymys> getKysymykset() {
+		return kysymykset;
+	}
+
+	public void setKysymykset(List<Kysymys> kysymykset) {
+		this.kysymykset = kysymykset;
+	}
+
+	@Override
     public String toString() {
         return "Kysely [id=" + kyselyId + ", otsikko=" + otsikko + ", pvm=" + pvm + "]";
     }

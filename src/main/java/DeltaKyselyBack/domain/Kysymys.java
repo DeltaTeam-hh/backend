@@ -1,13 +1,23 @@
 package DeltaKyselyBack.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Kysymys {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
  private Long kysymysId;
  private String kysymysTeksti;
 
 @ManyToOne
+@JsonIgnore
 @JoinColumn(name = "kyselyId")
 private Kysely kysely;
 
@@ -30,6 +40,13 @@ public String getKysymysTeksti() {
 }
 public void setKysymysTeksti(String kysymysTeksti) {
     this.kysymysTeksti = kysymysTeksti;
+}
+
+public Kysely getKysely() {
+	return kysely;
+}
+public void setKysely(Kysely kysely) {
+	this.kysely = kysely;
 }
 @Override
 public String toString() {
