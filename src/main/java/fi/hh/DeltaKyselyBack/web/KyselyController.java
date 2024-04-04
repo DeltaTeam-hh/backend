@@ -53,7 +53,7 @@ public class KyselyController {
 	}
 	@RequestMapping(value = "/tallenna", method = RequestMethod.POST) 
 		public String save(Kysely kysely) {
-		repository.save(kysely);
+			kyselyRepositorio.save(kysely);
 		return "redirect:etusivu";
 	}
 	
