@@ -1,4 +1,4 @@
-package DeltaKyselyBack.domain;
+package fi.hh.DeltaKyselyBack.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

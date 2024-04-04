@@ -1,4 +1,4 @@
-package DeltaKyselyBack.domain;
+package fi.hh.DeltaKyselyBack.domain;
 
 import java.util.Date;
 import java.util.List;

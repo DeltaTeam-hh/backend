@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import DeltaKyselyBack.domain.Kysely;
-import DeltaKyselyBack.domain.KyselyRepositorio;
-import DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Kysely;
+import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
+import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 
 @Controller
@@ -42,28 +42,6 @@ public class KyselyController {
     }
 	
 
-	/*
-	 	@RequestMapping(value = { "/", "/players" })
-	public String playerList(Model model) {
-		
-		 List<Player> players = new ArrayList<>();
-		    for (Player player : playerRepository.findAll()) {
-		        players.add(player);
-		    }
-
-		Collections.sort(players, Collections.reverseOrder());
-
-		model.addAttribute("players", players);
-
-		return "players";
-	}
-	 */
-	
-@GetMapping("/etusivu")
-public String etusivu(Model model) {
-	return "etusivu";
-   
-}
 
 @PostMapping("/addKysely")
 public String addKysely(Model model) {

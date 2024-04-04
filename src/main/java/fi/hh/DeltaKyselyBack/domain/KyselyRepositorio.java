@@ -1,4 +1,4 @@
-package DeltaKyselyBack.domain;
+package fi.hh.DeltaKyselyBack.domain;
 
 
 import java.util.List;
@@ -7,9 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface KyselyRepositorio extends CrudRepository<Kysely, Long> {
 
-	List<Kysely> findById(String id); //saa muuttaa järkevämmäksi
+	List<Kysely> findByKyselyId(Long kyselyId); //saa muuttaa järkevämmäksi
 	
-	List<Kysely> findByName(String otsikko);
+	List<Kysely> findByOtsikko(String otsikko);
 
 
 }

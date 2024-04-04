@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import DeltaKyselyBack.domain.Kysymys;
-import DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Kysymys;
+import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
