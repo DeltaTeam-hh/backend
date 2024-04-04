@@ -16,9 +16,9 @@ public class KyselyController {
        
     }
 	
-	@PostMapping("/kysely")
-	public String kysely(Model model) {
-	    return "kysely";
+	@PostMapping("/addKysely")
+	public String addKysely(Model model) {
+	    return "addKysely";
 	}
 
 }

@@ -26,20 +26,21 @@
 			
 		<textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
 		
-		<div style="display: inline-block; padding-left: 700px">
+		<div style="display: flex; padding-left: 625px">
         <form th:action="@{/lisaa}" method="post">
             <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
         </form>
+		<br>		<br>
 		
-		 <div style="display: inline-block; padding-left: 300px">
         <form th:action="@{/laheta}" method="post">
             <input type="submit" value="Lähetä kysely" class="btn btn-sm btn-danger"/>
         </form>
+        <br>		<br>
         
-        <div style="display: inline-block; padding-left: 800px">
         <form th:action="@{/tallenna}" method="post">
             <input type="submit" value="Tallenna" class="btn btn-sm btn-danger"/>
         </form>
+        </div>
 	</p>
 
 </body>
