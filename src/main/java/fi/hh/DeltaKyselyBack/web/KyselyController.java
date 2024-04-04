@@ -41,6 +41,7 @@ public class KyselyController {
        
     }
 	
+
 	/*
 	 	@RequestMapping(value = { "/", "/players" })
 	public String playerList(Model model) {
@@ -58,9 +59,14 @@ public class KyselyController {
 	}
 	 */
 	
-	@PostMapping("/kysely")
-	public String kysely(Model model) {
-	    return "kysely";
-	}
+@GetMapping("/etusivu")
+public String etusivu(Model model) {
+	return "etusivu";
+   
+}
 
+@PostMapping("/addKysely")
+public String addKysely(Model model) {
+    return "addKysely";
+}
 }
