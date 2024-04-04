@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etusivu</title>
+</head>
+<body>
+
+  
+<h1><p style="text-align: center;">Tervetuloa kyselyyn!</p></h1>
+		
+
+
+	
+	<p>
+		<br>
+		<br>
+		 <div style="display: inline-block; padding-left: 720px">
+        <form th:action="@{/kysely}" method="post">
+		    <input type="submit" value="Lisää kysely" class="btn btn-sm btn-danger"/>
+		</form>
+
+    </div>
+		<br><br>
+		
+	
+	</p>
+
+</body>
+</html>
+

@@ -13,26 +13,32 @@
 
 
 	<p style="text-align: center;">
-		<span>Kysmys:</span>
+		<span>Otsikko:</span>
 		<br>
 		<input type="text"></input>
 		
-		 <div style="display: inline-block; padding-left: 740px">
-        <form th:action="@{/kyssari}" method="post">
-            <input type="submit" value="Kysy" class="btn btn-sm btn-danger"/>
-        </form>
-    </div>
+		
 		<br><br>
 		
 		<p style="text-align: center;">
-		<span>Vastaus:</span>
+		<span>Kysymys/-ykset:</span>
 			<br>
 			
 		<textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
 		
-		 <div style="display: inline-block; padding-left: 740px">
-        <form th:action="@{/vastaus}" method="post">
-            <input type="submit" value="Vastaa" class="btn btn-sm btn-danger"/>
+		<div style="display: inline-block; padding-left: 700px">
+        <form th:action="@{/lisaa}" method="post">
+            <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
+        </form>
+		
+		 <div style="display: inline-block; padding-left: 300px">
+        <form th:action="@{/laheta}" method="post">
+            <input type="submit" value="Lähetä kysely" class="btn btn-sm btn-danger"/>
+        </form>
+        
+        <div style="display: inline-block; padding-left: 800px">
+        <form th:action="@{/tallenna}" method="post">
+            <input type="submit" value="Tallenna" class="btn btn-sm btn-danger"/>
         </form>
 	</p>
 
