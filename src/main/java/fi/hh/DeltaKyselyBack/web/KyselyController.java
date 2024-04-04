@@ -13,9 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+
+
 
 
 @Controller
@@ -41,10 +48,19 @@ public class KyselyController {
        
     }
 	
+	@PostMapping("/addKysely")
+	public String addKysely(Model model) {
+	    model.addAttribute("kysely", new Kysely());
+	    return "addKysely";
+
+	}
+	@RequestMapping(value = "/tallenna", method = RequestMethod.POST) 
+		public String save(Kysely kysely) {
+			kyselyRepositorio.save(kysely);
+		return "redirect:etusivu";
+	}
+	
 
 
-@PostMapping("/addKysely")
-public String addKysely(Model model) {
-    return "addKysely";
-}
+
 }
