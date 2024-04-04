@@ -1,5 +1,7 @@
 package DeltaKyselyBack.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class Kysymys {
  private String kysymysTeksti;
 
 @ManyToOne
+@JsonIgnore
 @JoinColumn(name = "kyselyId")
 private Kysely kysely;
 
