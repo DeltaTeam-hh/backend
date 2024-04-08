@@ -8,9 +8,19 @@
 <body>
 
   
-<h1><p style="text-align: center;">Tervetuloa kyselyyn!</p></h1>
-		
+<h1><p style="text-align: center;">Kyselylista</p></h1>
 
+		<table class="table table-striped">
+			<tr>
+				<th>Kyselyn nimi</th>
+				
+			</tr>
+			<tr th:each="kysely : ${kysely}">
+				<td th:text="${kysely.otsikko}"></td>
+			</tr>
+
+
+		</table>
 
 	
 	<p>
