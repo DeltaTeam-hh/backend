@@ -1,7 +1,6 @@
 package fi.hh.DeltaKyselyBack.web;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -14,13 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fi.hh.DeltaKyselyBack.domain.Kysely;
-import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
-import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 
 import fi.hh.DeltaKyselyBack.domain.Kysely;
