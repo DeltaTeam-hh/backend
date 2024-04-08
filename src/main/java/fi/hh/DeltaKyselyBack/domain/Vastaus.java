@@ -1,4 +1,4 @@
-package DeltaKyselyBack.domain;
+package fi.hh.DeltaKyselyBack.domain;
 
 public class Vastaus {
 	

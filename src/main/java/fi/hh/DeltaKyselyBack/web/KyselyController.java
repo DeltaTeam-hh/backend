@@ -12,19 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import DeltaKyselyBack.domain.KyselyRepositorio;
-import DeltaKyselyBack.domain.Kysely;
+
+import fi.hh.DeltaKyselyBack.domain.Kysely;
+import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
+import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
-import DeltaKyselyBack.domain.Kysely;
-import DeltaKyselyBack.domain.KyselyRepositorio;
-import DeltaKyselyBack.domain.KysymysRepositorio;
-
-
-import DeltaKyselyBack.domain.Kysely;
 
 @Controller
 public class KyselyController {
