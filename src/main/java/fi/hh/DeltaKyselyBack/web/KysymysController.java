@@ -16,14 +16,14 @@ public class KysymysController {
     private KysymysRepositorio kysymysRepositorio;
 
     // Kysymyksen lisäys
-    @GetMapping("/addkysymys")
+    @GetMapping("/addKysymys")
     public String addKysely(Model model) {
         model.addAttribute("kysymys", new Kysymys());
         return "redirect:/kysely"; // kysely.html
     }
 
     // kysymyksen tallennus?
-    @PostMapping("/savekysymys")
+    @PostMapping("/saveKysymys")
     public String saveKysymys(Kysymys kysymys) {
         kysymysRepositorio.save(kysymys);
         return "redirect:/kysely";

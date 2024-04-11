@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Kysymys;
 
 
 
@@ -54,11 +55,9 @@ public class KyselyController {
 	    return "addKysely";
 
 	}
-	@RequestMapping(value = "/tallenna", method = RequestMethod.POST) 
-		public String save(Kysely kysely) {
-			kyselyRepositorio.save(kysely);
-		return "redirect:etusivu";
-	}
+	
+	
+	
 	
 
 
