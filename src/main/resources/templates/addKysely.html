@@ -7,36 +7,32 @@
 </head>
 <body>
 
-  
 <h1><p style="text-align: center;">Tervetuloa kyselyyn!</p></h1>
-		
 
+<form action="/addKysely" method="post">
 
-	<p style="text-align: center;">
-		<span>Otsikko:</span>
-		<br>
-		<input type="text"></input>
-		
-		
-		<br><br>
-		
-		<p style="text-align: center;">
-		<span>Kysymys/-ykset:</span>
-			<br>
-			
-		<textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
-		
+    <p style="text-align: center;">
+        <span>Otsikko:</span>
+        <br>
+        <input type="text" name="otsikko" placeholder="Esim. lemmikin terveys tai mielipide kouluruuasra"></input>
+        <br><br>
+
+        <p style="text-align: center;">
+            <span>Kysymykset:</span>
+            <br>
+            <textarea name="kysymys" rows="2" cols="25" style="max-height: 40px; max-width: 200px; max-height: 2em; overflow: hidden; resize: none" placeholder="Esim. 1. Onko koulussasi ollut yleensä mielestäsi hyvää, keskivertaista tai huonoa ruokaa?"></textarea>
+       		
 		<div style="display: flex; padding-left: 625px">
-        <form th:action="@{/lisaa}" method="post">
-            <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
+        <form th:action="@{/addKysely}" method="post">
+        <button type="submit" name="lisaa">Lisää kysymys</button>
         </form>
-		<br>		<br>
-		
-        <form th:action="@{/laheta}" method="post">
-            <input type="submit" value="Lähetä kysely" class="btn btn-sm btn-danger"/>
-        </form>
-        <br>		<br>
+
+
+
+        <input type="submit" name="laheta" value="Lähetä kysely" class="btn btn-sm btn-danger" style="margin-right: 5px; margin-left: 5px"/>
+        <input type="submit" name="tallenna" value="Tallenna" class="btn btn-sm btn-danger"/>
         
+
         <form th:action="@{/tallenna}" method="post">
             <input type="submit" value="Tallenna" class="btn btn-sm btn-danger"/>
         </form>
@@ -106,7 +102,15 @@
         
 	</p>
 
+    </p>
+    </div>
+
+</form>
+
+
 </body>
+</html>
+
 </html>
 
 

@@ -1,6 +1,7 @@
 package fi.hh.DeltaKyselyBack.web;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Kysymys;
 
 
 
@@ -30,9 +32,6 @@ public class KyselyController {
 	
 	@Autowired
 	private KyselyRepositorio kyselyRepositorio;
-	
-	@Autowired
-	private KysymysRepositorio kysymysRepositorio;
 	
 	@RequestMapping(value = { "/", "/etusivu" })
     public String kyselyList(Model model) {
@@ -52,13 +51,18 @@ public class KyselyController {
 	public String addKysely(Model model) {
 	    model.addAttribute("kysely", new Kysely());
 	    return "addKysely";
+	}
+	    
+	 @PostMapping("/showKysely")
+		public String showKysely(Model model, Long kyselyId) {
+	        Kysely kysely = kyselyRepositorio.findById(kyselyId).orElse(null);
+		    model.addAttribute("show", kysely);
 
+		    return "showKysely";
 	}
-	@RequestMapping(value = "/tallenna", method = RequestMethod.POST) 
-		public String save(Kysely kysely) {
-			kyselyRepositorio.save(kysely);
-		return "redirect:etusivu";
-	}
+	
+	
+	
 	
 
 
