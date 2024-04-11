@@ -55,8 +55,8 @@ public class KyselyController {
 	    
 	 @PostMapping("/showKysely")
 		public String showKysely(Model model, Long kyselyId) {
-		    model.addAttribute("show", new Kysely());
-	        kyselyRepositorio.findById(kyselyId).orElse(null);
+	        Kysely kysely = kyselyRepositorio.findById(kyselyId).orElse(null);
+		    model.addAttribute("show", kysely);
 
 		    return "showKysely";
 	}

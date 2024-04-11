@@ -26,7 +26,7 @@ public class KysymysController {
     @PostMapping("/saveKysymys")
     public String saveKysymys(Kysymys kysymys) {
         kysymysRepositorio.save(kysymys);
-        return "redirect:/kysely";
+        return "redirect:/addKysely";
     }
 
 }
