@@ -53,7 +53,7 @@ public class KyselyController {
 	    return "addKysely";
 	}
 	    
-	 @PostMapping("/showKyselyKysely")
+	 @PostMapping("/showKysely")
 		public String showKysely(Model model, Long kyselyId) {
 		    model.addAttribute("show", new Kysely());
 	        kyselyRepositorio.findById(kyselyId).orElse(null);
