@@ -41,6 +41,69 @@
             <input type="submit" value="Tallenna" class="btn btn-sm btn-danger"/>
         </form>
         </div>
+        
+      <form id="kysymyksetForm" action="/save" method="post">
+        <div id="kysymyksetContainer">
+            <!-- Input fields for the first Kysymys -->
+            <div class="kysymys">
+                <label>Kysymysteksti:</label>
+                <input type="text" name="kysymysTeksti" required>
+            </div>
+        </div>
+        <!-- Button to add new question fields -->
+        <button type="button" id="addQuestionButton">Lisää uusi kysymys</button>
+        <br>
+        <!-- Button to save all questions -->
+        <button type="submit">Tallenna kysymykset</button>
+    </form>
+
+    <script>
+    document.getElementById('addQuestionButton').addEventListener('click', function() {
+        // Clone the template question fields
+        var template = document.querySelector('.kysymys');
+        var clone = template.cloneNode(true);
+
+        // Clear input values
+        var inputs = clone.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            input.value = '';
+        });
+
+        // Append the cloned question fields to the container
+        var container = document.getElementById('kysymyksetContainer');
+        container.appendChild(clone);
+    });
+
+    document.getElementById('saveAllQuestionsButton').addEventListener('click', function() {
+        // Serialize form data
+        var formData = new FormData(document.getElementById('kysymyksetForm'));
+
+        // Send the form data to the server
+        fetch('/save', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(message => {
+            // Handle success response
+            console.log(message);
+            // Optionally, redirect or show a success message
+        })
+        .catch(error => {
+            // Handle error
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    });
+</script>
+
+
+
+        
 	</p>
 
 </body>
