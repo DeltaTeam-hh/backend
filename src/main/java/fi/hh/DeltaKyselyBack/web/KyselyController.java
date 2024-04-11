@@ -1,6 +1,7 @@
 package fi.hh.DeltaKyselyBack.web;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -32,9 +33,6 @@ public class KyselyController {
 	@Autowired
 	private KyselyRepositorio kyselyRepositorio;
 	
-	@Autowired
-	private KysymysRepositorio kysymysRepositorio;
-	
 	@RequestMapping(value = { "/", "/etusivu" })
     public String kyselyList(Model model) {
 		
@@ -53,7 +51,14 @@ public class KyselyController {
 	public String addKysely(Model model) {
 	    model.addAttribute("kysely", new Kysely());
 	    return "addKysely";
+	}
+	    
+	 @PostMapping("/showKyselyKysely")
+		public String showKysely(Model model, Long kyselyId) {
+		    model.addAttribute("show", new Kysely());
+	        kyselyRepositorio.findById(kyselyId).orElse(null);
 
+		    return "showKysely";
 	}
 	
 	

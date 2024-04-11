@@ -29,4 +29,11 @@ public class Vastaus {
 	public void setVastausTxt(String vastausTxt) {
 		this.vastausTxt = vastausTxt;
 	}
+
+	@Override
+	public String toString() {
+		return "Vastaus [vastausId=" + vastausId + ", vastausTxt=" + vastausTxt + "]";
+	}
+	
+	
 }
