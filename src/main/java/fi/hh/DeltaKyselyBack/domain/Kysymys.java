@@ -1,6 +1,7 @@
 package fi.hh.DeltaKyselyBack.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Kysymys {
  private String kysymysTeksti;
 
 @ManyToOne
-@JsonIgnore
+@JsonIgnoreProperties ("kysymykset")
 @JoinColumn(name = "kyselyId")
 private Kysely kysely;
 

@@ -3,6 +3,9 @@ package fi.hh.DeltaKyselyBack.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,7 @@ public class Kysely {
     private String otsikko;
     private Date pvm;
 
+    @JsonIgnoreProperties("kysely")
     @OneToMany(mappedBy = "kysely", cascade = CascadeType.ALL)
     private List<Kysymys> kysymykset;
 
