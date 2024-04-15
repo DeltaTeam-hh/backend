@@ -1,9 +1,5 @@
 package fi.hh.DeltaKyselyBack.web;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b21fc01bceb4d58cf1786dcc1eb12eb04e98e8f
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
