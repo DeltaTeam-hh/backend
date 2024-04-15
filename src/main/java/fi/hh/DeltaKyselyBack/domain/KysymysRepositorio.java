@@ -9,5 +9,7 @@ public interface KysymysRepositorio extends CrudRepository<Kysymys, Long> {
 
 	List<Kysymys> findByKysymysTeksti(String kysymysTeksti); //saa muuttaa järkevämmäksi
 
+	//void saveAll(List<String> kysymykset);
+
 
 }
