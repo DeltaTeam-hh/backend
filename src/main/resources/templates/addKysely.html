@@ -9,51 +9,35 @@
 
 <h1><p style="text-align: center;">Tervetuloa kyselyyn!</p></h1>
 
-<form action="/addKysely" method="post">
 
-    <p style="text-align: center;">
-        <span>Otsikko:</span>
-        <br>
-        <input type="text" name="otsikko" placeholder="Esim. lemmikin terveys tai mielipide kouluruuasra"></input>
-        <br><br>
+<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post">
+    <label for="otsikko">Otsikko</label>
+    <input type="text" id="otsikko" th:field="*{otsikko}" />
 
-        <p style="text-align: center;">
-            <span>Kysymykset:</span>
-            <br>
-            <textarea name="kysymys" rows="2" cols="25" style="max-height: 40px; max-width: 200px; max-height: 2em; overflow: hidden; resize: none" placeholder="Esim. 1. Onko koulussasi ollut yleensä mielestäsi hyvää, keskivertaista tai huonoa ruokaa?"></textarea>
-       		
-		<div style="display: flex; padding-left: 625px">
-        <form th:action="@{/addKysely}" method="post">
-        <button type="submit" name="lisaa">Lisää kysymys</button>
-        </form>
+    <div style="clear: both; display: block; height: 10px;"></div>
+    
+    <!-- Input fields for the first Kysymys -->
+    <div class="kysymys">
+        <label>Kysymysteksti:</label>
+        <input type="text" name="kysymysTeksti" required>
+    </div>
+    
+    <!-- Container for additional Kysymys fields -->
+    <div id="kysymyksetContainer"></div>
+    
+    <!-- Button to add new question fields -->
+    <button type="button" id="addQuestionButton">Lisää uusi kysymys</button>
+    <br>
+    
+    <!-- Button to save all questions and Kysely -->
+    <button type="submit">Tallenna kysymykset</button>
+</form>
 
+<ul>
+    <li th:each="kysymys : ${kysymykset}" th:text="${kysymys.kysymysTeksti}"></li>
+</ul>
 
-
-        <input type="submit" name="laheta" value="Lähetä kysely" class="btn btn-sm btn-danger" style="margin-right: 5px; margin-left: 5px"/>
-        <input type="submit" name="tallenna" value="Tallenna" class="btn btn-sm btn-danger"/>
-        
-
-        <form th:action="@{/tallenna}" method="post">
-            <input type="submit" value="Tallenna" class="btn btn-sm btn-danger"/>
-        </form>
-        </div>
-        
-      <form id="kysymyksetForm" action="/save" method="post">
-        <div id="kysymyksetContainer">
-            <!-- Input fields for the first Kysymys -->
-            <div class="kysymys">
-                <label>Kysymysteksti:</label>
-                <input type="text" name="kysymysTeksti" required>
-            </div>
-        </div>
-        <!-- Button to add new question fields -->
-        <button type="button" id="addQuestionButton">Lisää uusi kysymys</button>
-        <br>
-        <!-- Button to save all questions -->
-        <button type="submit">Tallenna kysymykset</button>
-    </form>
-
-    <script>
+<script>
     document.getElementById('addQuestionButton').addEventListener('click', function() {
         // Clone the template question fields
         var template = document.querySelector('.kysymys');
@@ -69,43 +53,7 @@
         var container = document.getElementById('kysymyksetContainer');
         container.appendChild(clone);
     });
-
-    document.getElementById('saveAllQuestionsButton').addEventListener('click', function() {
-        // Serialize form data
-        var formData = new FormData(document.getElementById('kysymyksetForm'));
-
-        // Send the form data to the server
-        fetch('/save', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(message => {
-            // Handle success response
-            console.log(message);
-            // Optionally, redirect or show a success message
-        })
-        .catch(error => {
-            // Handle error
-            console.error('There was a problem with the fetch operation:', error);
-        });
-    });
 </script>
-
-
-
-        
-	</p>
-
-    </p>
-    </div>
-
-</form>
 
 
 </body>

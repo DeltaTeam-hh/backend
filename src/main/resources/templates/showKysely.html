@@ -7,7 +7,33 @@
 </head>
 <body>
 
-  
+  <h1><p style="text-align: center;">Kysely: <span th:text="${kysely.otsikko}"></span></p></h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>Kysymys</th>
+    </tr>
+    <tr th:each="kysymys : ${kysely.kysymykset}">
+        <td th:text="${kysymys.kysymysTeksti}"></td>
+    </tr>
+</table>
+
+<p>
+    <br>
+    <div style="display: inline-block; padding-left: 720px">
+        <form th:action="@{/addKysymys}" method="post">
+            <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
+            <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
+        </form>
+    </div>
+    <br><br>
+</p>
+
+<!-- Button to navigate back to the main page -->
+<div style="text-align: center;">
+    <a th:href="@{/etusivu}" class="btn btn-sm btn-primary">Takaisin etusivulle</a>
+</div>
+
 
 </body>
 </html>

@@ -16,11 +16,8 @@ import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class KysymysController {
@@ -42,14 +39,20 @@ public class KysymysController {
     }
 
 
-    @PostMapping("/save")
-    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, RedirectAttributes redirectAttributes) {
+    @PostMapping("/savekysymykset")
+    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
         for (String kysymysTeksti : kysymysTekstit) {
             Kysymys kysymys = new Kysymys();
             kysymys.setKysymysTeksti(kysymysTeksti);
             kysymysRepositorio.save(kysymys);
         }
-        redirectAttributes.addFlashAttribute("message", "Questions saved successfully!");
+        
+        Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
+        List<Kysymys> savedKysymykset = new ArrayList<>();
+        savedKysymyksetIterable.forEach(savedKysymykset::add);
+        
+        model.addAttribute("kysymykset", savedKysymykset);
+        
         return "redirect:/addKysely";
     }
     

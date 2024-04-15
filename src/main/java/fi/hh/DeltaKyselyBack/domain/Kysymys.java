@@ -52,9 +52,7 @@ public void setKysely(Kysely kysely) {
 public String toString() {
     return "Kysymys [kysymysId=" + kysymysId + ", kysymysTeksti=" + kysymysTeksti + "]";
 }
-public void setLisaa(String lisaaKyssari) {
-	
-}
+
 
 
 

@@ -7,9 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface KyselyRepositorio extends CrudRepository<Kysely, Long> {
 
-	List<Kysely> findByKyselyId(Long kyselyId); //saa muuttaa järkevämmäksi
-	
-	List<Kysely> findByOtsikko(String otsikko);
+	List<Kysely> findByKyselyId(Long kyselyId);  // Corrected method name
+    
+    List<Kysely> findByOtsikko(String otsikko);
 
 
 }
