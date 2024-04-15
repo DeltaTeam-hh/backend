@@ -1,14 +1,10 @@
 package fi.hh.DeltaKyselyBack.web;
 
 
-<<<<<<< HEAD
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
-=======
->>>>>>> 5278affa1e0f6bbdd232a7afa4a09bb7101691c0
 
-import java.util.ArrayList;
 import java.util.List;
 
 
