@@ -1,5 +1,6 @@
 package fi.hh.DeltaKyselyBack.web;
 
+
 import java.util.List;
 
 
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 
+
+
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
-import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
+import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+
 
 
 
@@ -65,14 +69,7 @@ public class KyselyController {
 	    }
 	
 	
-	    
-	/* @PostMapping("/showKysely")
-		public String showKysely(Model model, Long kyselyId) {
-	        Kysely kysely = kyselyRepositorio.findById(kyselyId).orElse(null);
-		    model.addAttribute("show", kysely);
-
-		    return "showKysely";
-	} */
+	   
 	
 	 @GetMapping("/showKysely/{id}")
 	 public String showKysely(@PathVariable Long id, Model model) {
