@@ -1,22 +1,15 @@
 package fi.hh.DeltaKyselyBack.web;
 
-
-<<<<<<< HEAD
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
-=======
->>>>>>> 5278affa1e0f6bbdd232a7afa4a09bb7101691c0
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,16 +31,15 @@ public class KysymysController {
         return "addKysely"; // kysely.html
     }
 
-
     @GetMapping("/addKysymys")
     public String addKysely(Model model) {
         model.addAttribute("kysymys", new Kysymys());
         return "redirect:/kysely"; // kysely.html
     }
 
-
     @PostMapping("/save")
-    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, RedirectAttributes redirectAttributes) {
+    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit,
+            RedirectAttributes redirectAttributes) {
         for (String kysymysTeksti : kysymysTekstit) {
             Kysymys kysymys = new Kysymys();
             kysymys.setKysymysTeksti(kysymysTeksti);
@@ -56,6 +48,5 @@ public class KysymysController {
         redirectAttributes.addFlashAttribute("message", "Questions saved successfully!");
         return "redirect:/addKysely";
     }
-    
 
 }
