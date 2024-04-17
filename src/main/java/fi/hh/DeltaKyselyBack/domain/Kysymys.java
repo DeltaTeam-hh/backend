@@ -2,7 +2,6 @@ package fi.hh.DeltaKyselyBack.domain;
 
 import java.util.List;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -27,17 +26,13 @@ public class Kysymys {
     private Kysely kysely;
 
     @JsonIgnoreProperties("vastaus")
-    @OneToMany(mappedBy = "vastaus", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "kysymys", cascade = CascadeType.ALL)
     private List<Vastaus> vastaukset;
-
-
-
 
     public Kysymys() {
         this.kysymysId = null;
         this.kysymysTeksti = null;
     }
-
 
     public Kysymys(Long kysymysId, String kysymysTeksti) {
         this.kysymysId = kysymysId;
