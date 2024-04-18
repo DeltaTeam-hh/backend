@@ -31,12 +31,14 @@ public class Kysely {
         this.kyselyId = null;
         this.otsikko = null;
         this.pvm = null;
-    }
+        //this.kysymykset = null;
 
-    public Kysely(Long kyselyId, String otsikko, Date pvm) {
-        this.kyselyId = kyselyId;
+    }
+//List<Kysymys> kysymykset
+    public Kysely(String otsikko, Date pvm) {
         this.otsikko = otsikko;
         this.pvm = pvm;
+        //this.kysymykset = kysymykset;
     }
 
     public Long getKyselyId() {

@@ -32,11 +32,12 @@ public class Kysymys {
     public Kysymys() {
         this.kysymysId = null;
         this.kysymysTeksti = null;
+        this.kysely = null;
     }
 
-    public Kysymys(Long kysymysId, String kysymysTeksti) {
-        this.kysymysId = kysymysId;
+    public Kysymys(String kysymysTeksti, Kysely kysely) {
         this.kysymysTeksti = kysymysTeksti;
+        this.kysely = kysely;
     }
 
     public Long getKysymysId() {
