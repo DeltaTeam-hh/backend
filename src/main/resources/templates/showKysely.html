@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etusivu</title>
+    <title>Kysely</title>
 </head>
 <body>
 
-  <h1><p style="text-align: center;">Kysely: <span th:text="${kysely.otsikko}"></span></p></h1>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <h1 style="margin-right: 50px;">Kysely: <span th:text="${kysely.otsikko}"></span></h1>
+    <button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Takaisin etusivulle</button>
+</div>
+    
 
-<table class="table table-striped">
+<table class="table table-striped" style="padding-left: 735px">
     <tr>
         <th>Kysymys</th>
     </tr>
@@ -29,10 +33,7 @@
     <br><br>
 </p>
 
-<!-- Button to navigate back to the main page -->
-<div style="text-align: center;">
-    <a th:href="@{/etusivu}" class="btn btn-sm btn-primary">Takaisin etusivulle</a>
-</div>
+
 
 
 </body>

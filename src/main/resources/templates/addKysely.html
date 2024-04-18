@@ -7,11 +7,14 @@
 </head>
 <body>
 
-<h1><p style="text-align: center;">Tervetuloa kyselyyn!</p></h1>
+<div style="display: flex; align-items: center; justify-content: center;">
+	<h1><p style="padding-right: 50px;">Tervetuloa kyselyyn!</p></h1>
+  <button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Takaisin etusivulle</button>
+</div>
 
 
-<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post">
-    <label for="otsikko">Otsikko</label>
+<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post" style="padding-left: 575px">
+    <label for="otsikko">Otsikko:</label>
     <input type="text" id="otsikko" th:field="*{otsikko}" />
 
     <div style="clear: both; display: block; height: 10px;"></div>
@@ -24,13 +27,17 @@
     
     <!-- Container for additional Kysymys fields -->
     <div id="kysymyksetContainer"></div>
-    
-    <!-- Button to add new question fields -->
-    <button type="button" id="addQuestionButton">Lisää uusi kysymys</button>
     <br>
+ 
+  <div style="display: flex">   
+    <!-- Button to add new question fields -->
+    <button type="button" id="addQuestionButton" style="margin-right: 10px;">Lisää uusi kysymys</button>
+    <br>
+    
     
     <!-- Button to save all questions and Kysely -->
     <button type="submit">Tallenna kysymykset</button>
+    </div>
 </form>
 
 <ul>
