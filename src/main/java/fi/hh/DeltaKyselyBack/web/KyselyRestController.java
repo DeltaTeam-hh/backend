@@ -31,8 +31,8 @@ public class KyselyRestController {
   }
 
   // Hakee yksittäisen kyselyn
-  @GetMapping("/kyselyt/{id}")
-  public @ResponseBody List<Kysely> getKyselyById(@PathVariable("id") Long kyselyId) {
+  @GetMapping("/kyselyt/{kyselyId}")
+  public @ResponseBody List<Kysely> getKyselyById(@PathVariable("kyselyId") Long kyselyId) {
     return kRepositorio.findByKyselyId(kyselyId);
   }
 
