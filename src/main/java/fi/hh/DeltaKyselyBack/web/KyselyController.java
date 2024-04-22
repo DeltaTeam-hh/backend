@@ -52,6 +52,14 @@ public class KyselyController {
 	    return "addKysely";
 	}
 	
+	@GetMapping("/poistaKysely/{kyselyId}")
+	public String poistaKysely(@PathVariable("kyselyId") Long kyselyId) {
+	    kyselyRepositorio.deleteById(kyselyId);
+	    return "redirect:/etusivu";
+	}
+
+
+
 
 	
 	 @PostMapping("/savekysely")

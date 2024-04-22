@@ -19,6 +19,9 @@
     </tr>
     <tr th:each="kysymys : ${kysely.kysymykset}">
         <td th:text="${kysymys.kysymysTeksti}"></td>
+        <td>
+        <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
+        </td>
     </tr>
 </table>
 
