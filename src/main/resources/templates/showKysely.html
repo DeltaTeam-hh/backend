@@ -30,7 +30,28 @@
 
 <p>
     <br>
-   <div style="display: flex; padding-left: 720px">
+     <div style="display: flex; padding-left: 720px">   
+    <button type="button" id="addQuestionButton" style="margin-right: 10px;">Lisää uusi kysymys</button>
+   
+   <script>
+    document.getElementById('addQuestionButton').addEventListener('click', function() {
+        // Clone the template question fields
+        var template = document.querySelector('.kysymys');
+        var clone = template.cloneNode(true);
+
+        // Clear input values
+        var inputs = clone.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            input.value = '';
+        });
+
+        // Append the cloned question fields to the container
+        var container = document.getElementById('kysymyksetContainer');
+        container.appendChild(clone);
+    });
+</script>
+   
+ <!--  <div style="display: flex; padding-left: 720px">
     <form th:action="@{/addKysymys}" method="post" style="text-align: 10px; margin-right: 10px;">
         <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
         <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
@@ -38,8 +59,8 @@
    <!--  <form th:action="@{/muokkaa}" method="post">
         <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
         <input type="submit" value="Muokkaa" class="btn btn-sm btn-danger"/>
-    </form> -->
-</div>
+    </form>
+</div> -->
 
     </div>
     <br><br>
