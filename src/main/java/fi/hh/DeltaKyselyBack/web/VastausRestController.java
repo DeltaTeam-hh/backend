@@ -33,4 +33,4 @@ public class VastausRestController {
     public @ResponseBody Vastaus addVastaus(@RequestBody Vastaus newVastaus) {
         return vRepositorio.save(newVastaus);
     }
-}
+} 

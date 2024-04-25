@@ -1,3 +1,4 @@
+
 package fi.hh.DeltaKyselyBack.web;
 
 
@@ -7,15 +8,21 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+// import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Monivalinta;
+import fi.hh.DeltaKyselyBack.domain.MonivalintaRepo;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -23,19 +30,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KysymysController {
     @Autowired
     private KysymysRepositorio kysymysRepositorio;
+ 
+    
+    @Autowired
+    private MonivalintaRepo monivalintaRepo;
 
-    // Kysymyksen lisäys
-    @GetMapping("/addKysely")
-    public String addKysymys(Model model) {
-        model.addAttribute("kysymykset", kysymysRepositorio.findAll());
-        return "addKysely"; // kysely.html
-    }
-
-
-    @GetMapping("/addKysymys")
-    public String addKysely(Model model) {
-        model.addAttribute("kysymys", new Kysymys());
-        return "redirect:/kysely"; // kysely.html
+    @RequestMapping(value = "/addmonivalinta")
+	public String addMonivalinta(Model model) {
+		model.addAttribute("monivalinta", new Monivalinta());
+		return "addmonivalinta";
+	}
+    
+    @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
+    public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
+        kysymysRepositorio.deleteById(kysymysId);
+        return "redirect:/showKysely/" + kyselyId;
     }
 
 
