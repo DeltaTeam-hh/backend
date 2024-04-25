@@ -59,8 +59,6 @@ public class KyselyController {
 	}
 
 
-
-
 	
 	 @PostMapping("/savekysely")
 	    public String save(Kysely kysely, @RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
