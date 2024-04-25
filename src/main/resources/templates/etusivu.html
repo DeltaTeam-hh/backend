@@ -50,7 +50,10 @@
                 <button type="submit" th:text="${kysely.otsikko}" class="btn btn-link"></button>
             </form>
             <td>
-		<a th:href="@{/poistaKysely/{kyselyId}/(kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
+		<a th:href="@{/poistaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Poista</a>
+      <!--  <span>|</span>
+		<a th:href="@{/muokkaaKyssari/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
+         -->
         </td>
     </tr>
 </table>
