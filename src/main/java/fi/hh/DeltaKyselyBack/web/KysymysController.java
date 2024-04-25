@@ -4,6 +4,7 @@ package fi.hh.DeltaKyselyBack.web;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -12,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-// import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
+
+import fi.hh.DeltaKyselyBack.domain.Kysely;
+import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
+
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Monivalinta;
@@ -26,10 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+
 @Controller
 public class KysymysController {
     @Autowired
     private KysymysRepositorio kysymysRepositorio;
+
  
     
     @Autowired
@@ -40,11 +46,41 @@ public class KysymysController {
 		model.addAttribute("monivalinta", new Monivalinta());
 		return "addmonivalinta";
 	}
+
+    private KyselyRepositorio kyselyRepositorio;
+
+    // Kysymyksen lisäys
+   /* @GetMapping("/addKysely")
+    public String addKysymys(Model model) {
+        model.addAttribute("kysymykset", kysymysRepositorio.findAll());
+        return "addKysely"; // kysely.html
+    }*/
+
+
+    /*@GetMapping("/addKysymys")
+    public String addKysely(Model model) {
+        model.addAttribute("kysymys", new Kysymys());
+        return "redirect:/kysely"; // kysely.html
+    }*/
+
     
     @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
     public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
         kysymysRepositorio.deleteById(kysymysId);
         return "redirect:/showKysely/" + kyselyId;
+
+        
+       
+    }
+    
+    
+    @GetMapping("/muokkaa/{id}")
+    public String muokkaa(@PathVariable("id") Long kysymysId, @PathVariable("kyselyId") Long kyselyId, Model model) {
+    	Kysely kysely = kyselyRepositorio.findById(kyselyId).orElseThrow(() -> new IllegalArgumentException("Invalid kysely Id:" + kyselyId));
+	    model.addAttribute("kysely", kysely);
+	       return "redirect:/showKysely/" + kyselyId;
+        
+
     }
 
 

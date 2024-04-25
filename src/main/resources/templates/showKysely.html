@@ -3,36 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etusivu</title>
+    <title>Kysely</title>
 </head>
 <body>
 
-  <h1><p style="text-align: center;">Kysely: <span th:text="${kysely.otsikko}"></span></p></h1>
+<div style="display: flex; align-items: center; justify-content: center; padding-left: 325px">
+    <h1 style="margin-right: 100px;">Kysely: <span th:text="${kysely.otsikko}"></span></h1>
+    <button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Takaisin etusivulle</button>
+</div>
+    
 
-<table class="table table-striped">
+<table class="table table-striped" style="padding-left: 735px">
     <tr>
         <th>Kysymys</th>
     </tr>
     <tr th:each="kysymys : ${kysely.kysymykset}">
         <td th:text="${kysymys.kysymysTeksti}"></td>
+        <td>
+        <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
+     	<span>|</span>
+     	<a th:href="@{/muokkaa/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Muokkaa</a>
+     	
+        </td>
     </tr>
 </table>
 
 <p>
     <br>
-    <div style="display: inline-block; padding-left: 720px">
-        <form th:action="@{/addKysymys}" method="post">
-            <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
-            <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
-        </form>
+     <div style="display: flex; padding-left: 720px">   
+    <button type="button" id="addQuestionButton" style="margin-right: 10px;">Lisää uusi kysymys</button>
+   
+   <script>
+    document.getElementById('addQuestionButton').addEventListener('click', function() {
+        // Clone the template question fields
+        var template = document.querySelector('.kysymys');
+        var clone = template.cloneNode(true);
+
+        // Clear input values
+        var inputs = clone.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            input.value = '';
+        });
+
+        // Append the cloned question fields to the container
+        var container = document.getElementById('kysymyksetContainer');
+        container.appendChild(clone);
+    });
+</script>
+   
+ <!--  <div style="display: flex; padding-left: 720px">
+    <form th:action="@{/addKysymys}" method="post" style="text-align: 10px; margin-right: 10px;">
+        <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
+        <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
+    </form>
+   <!--  <form th:action="@{/muokkaa}" method="post">
+        <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
+        <input type="submit" value="Muokkaa" class="btn btn-sm btn-danger"/>
+    </form>
+</div> -->
+
     </div>
     <br><br>
 </p>
 
-<!-- Button to navigate back to the main page -->
-<div style="text-align: center;">
-    <a th:href="@{/etusivu}" class="btn btn-sm btn-primary">Takaisin etusivulle</a>
-</div>
+
 
 
 </body>

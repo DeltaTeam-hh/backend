@@ -38,6 +38,7 @@ public class Vastaus {
 		this.monivalinnat = null;
 	}
 
+
 	
 	
 	public Vastaus(String vastausTxt, Kysymys kysymys, List<Monivalinta> monivalinnat) {

@@ -54,6 +54,13 @@ public class Kysymys {
 		this.tyyppi = tyyppi;
 	}
 
+
+   /* public Kysymys(String kysymysTeksti, Kysely kysely) {
+        this.kysymysTeksti = kysymysTeksti;
+        this.kysely = kysely;
+    } */
+
+
 	public Long getKysymysId() {
         return kysymysId;
     }

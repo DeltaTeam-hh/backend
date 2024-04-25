@@ -27,6 +27,7 @@ public class Kysely {
 	@OneToMany(mappedBy = "kysely", cascade = CascadeType.ALL)
 	private List<Kysymys> kysymykset;
 
+<<<<<<< HEAD
 	public Kysely() {
 		this.kyselyId = null;
 		this.otsikko = null;
@@ -34,6 +35,21 @@ public class Kysely {
 		this.kysymykset = null;
 
 	}
+=======
+    public Kysely() {
+        this.kyselyId = null;
+        this.otsikko = null;
+        this.pvm = null;
+        //this.kysymykset = null;
+
+    }
+//List<Kysymys> kysymykset
+    public Kysely(String otsikko, Date pvm) {
+        this.otsikko = otsikko;
+        this.pvm = pvm;
+        //this.kysymykset = kysymykset;
+    }
+>>>>>>> ee4b616912b18facf68755a2bb5cdca768108507
 
 	public Kysely(String otsikko, Date pvm, List<Kysymys> kysymykset) {
 		this.otsikko = otsikko;
