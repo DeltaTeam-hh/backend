@@ -21,6 +21,9 @@
         <td th:text="${kysymys.kysymysTeksti}"></td>
         <td>
         <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
+     	<span>|</span>
+     	<a th:href="@{/muokkaa/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Muokkaa</a>
+     	
         </td>
     </tr>
 </table>
@@ -32,10 +35,10 @@
         <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
         <input type="submit" value="Lisää kysymys" class="btn btn-sm btn-danger"/>
     </form>
-    <form th:action="@{/muokkaa}" method="post">
+   <!--  <form th:action="@{/muokkaa}" method="post">
         <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
         <input type="submit" value="Muokkaa" class="btn btn-sm btn-danger"/>
-    </form>
+    </form> -->
 </div>
 
     </div>
