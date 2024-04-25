@@ -27,9 +27,10 @@ public class Vastaus {
 
 	}
 
-	public Vastaus(Long vastausId, String vastausTxt) {
-		this.vastausId = vastausId;
+	public Vastaus(String vastausTxt, Kysymys kysymys) {
+		
 		this.vastausTxt = vastausTxt;
+		this.kysymys = kysymys;
 	}
 
 	public Long getVastausId() {

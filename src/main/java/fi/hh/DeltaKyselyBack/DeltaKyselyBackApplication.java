@@ -11,6 +11,8 @@ import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+import fi.hh.DeltaKyselyBack.domain.VastausRepositorio;
+import fi.hh.DeltaKyselyBack.domain.Vastaus;
 
 
 @SpringBootApplication
@@ -21,7 +23,7 @@ public class DeltaKyselyBackApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(KyselyRepositorio kyselyRepositorio, KysymysRepositorio kysymysRepositorio) {
+	public CommandLineRunner demo(KyselyRepositorio kyselyRepositorio, KysymysRepositorio kysymysRepositorio, VastausRepositorio vastausRepositorio) {
 		
 		return (args) -> {
 			Kysely kysely1 = new Kysely("Testikysely 1", null);
@@ -37,6 +39,10 @@ public class DeltaKyselyBackApplication {
 			kysymysRepositorio.save(kysymys1);
 			kysymysRepositorio.save(kysymys2);
 			kysymysRepositorio.save(kysymys3);
+
+			Vastaus vastaus1 = new Vastaus("Punainen", kysymys1);
+
+			vastausRepositorio.save(vastaus1);
 
 
 		};
