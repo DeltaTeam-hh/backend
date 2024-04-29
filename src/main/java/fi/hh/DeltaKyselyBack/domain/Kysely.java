@@ -1,8 +1,8 @@
+
 package fi.hh.DeltaKyselyBack.domain;
 
 import java.util.Date;
 import java.util.List;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,56 +17,59 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Kysely {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long kyselyId;
-    private String otsikko;
-    private Date pvm;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long kyselyId;
+	private String otsikko;
+	private Date pvm;
 
-    @JsonIgnoreProperties("kysely")
-    @OneToMany(mappedBy = "kysely", cascade = CascadeType.ALL)
-    private List<Kysymys> kysymykset;
+	@JsonIgnoreProperties("kysely")
+	@OneToMany(mappedBy = "kysely", cascade = CascadeType.ALL)
+	private List<Kysymys> kysymykset;
 
-    public Kysely() {
-        this.kyselyId = null;
-        this.otsikko = null;
-        this.pvm = null;
-        //this.kysymykset = null;
 
-    }
-//List<Kysymys> kysymykset
-    public Kysely(String otsikko, Date pvm) {
-        this.otsikko = otsikko;
-        this.pvm = pvm;
-        //this.kysymykset = kysymykset;
-    }
+	public Kysely() {
+		this.kyselyId = null;
+		this.otsikko = null;
+		this.pvm = null;
+		this.kysymykset = null;
 
-    public Long getKyselyId() {
-        return kyselyId;
-    }
+	}
 
-    public void setKyselyId(Long kyselyId) {
-        this.kyselyId = kyselyId;
-    }
 
-    public String getOtsikko() {
-        return otsikko;
-    }
 
-    public void setOtsikko(String otsikko) {
-        this.otsikko = otsikko;
-    }
+	public Kysely(String otsikko, Date pvm, List<Kysymys> kysymykset) {
+		this.otsikko = otsikko;
+		this.pvm = pvm;
+		this.kysymykset = kysymykset;
+	}
 
-    public Date getPvm() {
-        return pvm;
-    }
 
-    public void setPvm(Date pvm) {
-        this.pvm = pvm;
-    }
-    
+	public Long getKyselyId() {
+		return kyselyId;
+	}
 
-    public List<Kysymys> getKysymykset() {
+	public void setKyselyId(Long kyselyId) {
+		this.kyselyId = kyselyId;
+	}
+
+	public String getOtsikko() {
+		return otsikko;
+	}
+
+	public void setOtsikko(String otsikko) {
+		this.otsikko = otsikko;
+	}
+
+	public Date getPvm() {
+		return pvm;
+	}
+
+	public void setPvm(Date pvm) {
+		this.pvm = pvm;
+	}
+
+	public List<Kysymys> getKysymykset() {
 		return kysymykset;
 	}
 
@@ -75,8 +78,8 @@ public class Kysely {
 	}
 
 	@Override
-    public String toString() {
-        return "Kysely [id=" + kyselyId + ", otsikko=" + otsikko + ", pvm=" + pvm + "]";
-    }
+	public String toString() {
+		return "Kysely [id=" + kyselyId + ", otsikko=" + otsikko + ", pvm=" + pvm + "]";
+	}
 
 }

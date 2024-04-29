@@ -1,3 +1,4 @@
+
 package fi.hh.DeltaKyselyBack.web;
 
 
@@ -52,6 +53,7 @@ public class KyselyController {
 	    return "addKysely";
 	}
 	
+
 	@GetMapping("/poistaKysely/{id}")
 	public String poistaKysely(@PathVariable("id") Long kyselyId, Model model) {
 	    kyselyRepositorio.deleteById(kyselyId);
