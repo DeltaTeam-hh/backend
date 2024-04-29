@@ -30,7 +30,7 @@ public class VastausRestController {
     }
 
     @PostMapping("/vastaukset")
-    public @ResponseBody Vastaus addVastaus(@RequestBody Vastaus newVastaus) {
-        return vRepositorio.save(newVastaus);
+    public @ResponseBody List<Vastaus> addVastaus(@RequestBody List<Vastaus> newVastaukset) {
+        return (List<Vastaus>) vRepositorio.saveAll(newVastaukset);
     }
 }
