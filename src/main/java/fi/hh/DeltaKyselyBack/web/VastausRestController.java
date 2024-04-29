@@ -33,4 +33,4 @@ public class VastausRestController {
     public @ResponseBody List<Vastaus> addVastaus(@RequestBody List<Vastaus> newVastaukset) {
         return (List<Vastaus>) vRepositorio.saveAll(newVastaukset);
     }
-}
+} 

@@ -1,3 +1,4 @@
+
 package fi.hh.DeltaKyselyBack.domain;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class Kysymys {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long kysymysId;
     private String kysymysTeksti;
+    private String tyyppi;
 
     @ManyToOne
     @JsonIgnoreProperties("kysymykset")
@@ -28,19 +30,38 @@ public class Kysymys {
     @JsonIgnoreProperties("vastaus")
     @OneToMany(mappedBy = "kysymys", cascade = CascadeType.ALL)
     private List<Vastaus> vastaukset;
+    
+    @JsonIgnoreProperties("monivalinnat")
+    @OneToMany(mappedBy = "kysymys", cascade = CascadeType.ALL)
+    private List<Monivalinta> monivalinnat;
 
     public Kysymys() {
         this.kysymysId = null;
         this.kysymysTeksti = null;
         this.kysely = null;
-    }
+        this.vastaukset = null;
+		this.monivalinnat = null;
+		this.tyyppi = null;    
+	}
+    
 
-    public Kysymys(String kysymysTeksti, Kysely kysely) {
+    public Kysymys(String kysymysTeksti, Kysely kysely, List<Vastaus> vastaukset,
+			List<Monivalinta> monivalinnat, String tyyppi) {
+		this.kysymysTeksti = kysymysTeksti;
+		this.kysely = kysely;
+		this.vastaukset = vastaukset;
+		this.monivalinnat = monivalinnat;
+		this.tyyppi = tyyppi;
+	}
+
+
+   /* public Kysymys(String kysymysTeksti, Kysely kysely) {
         this.kysymysTeksti = kysymysTeksti;
         this.kysely = kysely;
-    }
+    } */
 
-    public Long getKysymysId() {
+
+	public Long getKysymysId() {
         return kysymysId;
     }
 
@@ -71,13 +92,30 @@ public class Kysymys {
     public void setVastaukset(List<Vastaus> vastaukset) {
         this.vastaukset = vastaukset;
     }
+    
+    
 
-    @Override
+    public List<Monivalinta> getMonivalinnat() {
+		return monivalinnat;
+	}
+
+	public void setMonivalinnat(List<Monivalinta> monivalinnat) {
+		this.monivalinnat = monivalinnat;
+	}
+	
+	
+
+	public String getTyyppi() {
+		return tyyppi;
+	}
+
+	public void setTyyppi(String tyyppi) {
+		this.tyyppi = tyyppi;
+	}
+
+	@Override
     public String toString() {
         return "Kysymys [kysymysId=" + kysymysId + ", kysymysTeksti=" + kysymysTeksti + "]";
     }
 
-    public void setLisaa(String lisaaKyssari) {
-
-    }
 }

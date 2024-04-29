@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
@@ -13,7 +14,9 @@
 </div>
 
 
-<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post" style="padding-left: 575px">
+
+<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post" style="padding-left: 575px; text-align: 10px; margin-right: 10px;">
+
     <label for="otsikko">Otsikko:</label>
     <input type="text" id="otsikko" th:field="*{otsikko}" />
 
@@ -29,10 +32,14 @@
     <div id="kysymyksetContainer"></div>
     <br>
  
+
   <div style="display: flex">   
     <!-- Button to add new question fields -->
     <button type="button" id="addQuestionButton" style="margin-right: 10px;">Lisää uusi kysymys</button>
     <br>
+
+  <br>
+
     
     
     <!-- Button to save all questions and Kysely -->
@@ -67,5 +74,3 @@
 </html>
 
 </html>
-
-
