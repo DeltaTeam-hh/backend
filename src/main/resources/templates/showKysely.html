@@ -21,9 +21,7 @@
         <td th:text="${kysymys.kysymysTeksti}"></td>
         <td>
         <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
-     	<span>|</span>
-     	<a th:href="@{/muokkaa/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Muokkaa</a>
-     	
+ 
         </td>
     </tr>
 </table>

@@ -51,9 +51,9 @@
             </form>
             <td>
 		<a th:href="@{/poistaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Poista</a>
-      <!--  <span>|</span>
-		<a th:href="@{/muokkaaKyssari/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
-         -->
+      <span>|</span>
+		<a th:href="@{/muokkaa/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
+         
         </td>
     </tr>
 </table>
