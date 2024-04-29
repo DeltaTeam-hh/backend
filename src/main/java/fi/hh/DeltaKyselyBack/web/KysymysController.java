@@ -36,7 +36,8 @@ public class KysymysController {
     @Autowired
     private KysymysRepositorio kysymysRepositorio;
 
- 
+    @Autowired
+    private KyselyRepositorio kyselyRepositorio;
     
     @Autowired
     private MonivalintaRepo monivalintaRepo;
@@ -46,6 +47,25 @@ public class KysymysController {
 		model.addAttribute("monivalinta", new Monivalinta());
 		return "addmonivalinta";
 	}
+    
+    
+   /* @PostMapping("/savemonivalinnat")
+    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
+        for (String kysymysTeksti : kysymysTekstit) {
+            Kysymys kysymys = new Kysymys();
+            kysymys.setKysymysTeksti(kysymysTeksti);
+            kysymysRepositorio.save(kysymys);
+        }
+        
+        Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
+        List<Kysymys> savedKysymykset = new ArrayList<>();
+        savedKysymyksetIterable.forEach(savedKysymykset::add);
+        
+        model.addAttribute("kysymykset", savedKysymykset);
+        
+        return "redirect:/addKysely";
+    }
+   
 
     private KyselyRepositorio kyselyRepositorio;
 

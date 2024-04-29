@@ -15,7 +15,7 @@ public class Monivalinta {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long monivalintaId;
-    private String monivalintaTxt;
+    private String vastausTxt;
     
     @ManyToOne
     @JsonIgnoreProperties("monivalinnat")
@@ -30,16 +30,16 @@ public class Monivalinta {
     
     public Monivalinta() {
 		this.monivalintaId = null;
-		this.monivalintaTxt = null;
 		this.kysymys = null;
 		this.vastaus = null;
+		this.vastausTxt = null;
 	}
     
 
-	public Monivalinta(String vastausvaihtoehto, Kysymys kysymys, Vastaus vastaus) {
-		this.monivalintaTxt = vastausvaihtoehto;
+	public Monivalinta(Kysymys kysymys, Vastaus vastaus, String vastausTxt) {
 		this.kysymys = kysymys;
 		this.vastaus = vastaus;
+		this.vastausTxt = vastausTxt;
 	}
 
 
@@ -48,18 +48,8 @@ public class Monivalinta {
 	}
 
 
-	public void setMonivalintaId(Long vaihtoehtoId) {
-		this.monivalintaId = vaihtoehtoId;
-	}
-
-
-	public String getMonivalintaTxt() {
-		return monivalintaTxt;
-	}
-
-
-	public void setMonivalintaTxt(String vastausvaihtoehto) {
-		this.monivalintaTxt = vastausvaihtoehto;
+	public void setMonivalintaId(Long monivalintaId) {
+		this.monivalintaId = monivalintaId;
 	}
 
 
@@ -81,11 +71,23 @@ public class Monivalinta {
 	public void setVastaus(Vastaus vastaus) {
 		this.vastaus = vastaus;
 	}
+	
+	
+
+
+	public String getVastausTxt() {
+		return vastausTxt;
+	}
+
+
+	public void setVastausTxt(String vastausTxt) {
+		this.vastausTxt = vastausTxt;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Vastausvaihtoehdot [vaihtoehtoId=" + monivalintaId + ", vastausvaihtoehto=" + monivalintaTxt
+		return "Vastausvaihtoehdot [vaihtoehtoId=" + monivalintaId + ", vastausvaihtoehto="
 				+ ", kysymys=" + kysymys + ", vastaus=" + vastaus + "]";
 	}
     

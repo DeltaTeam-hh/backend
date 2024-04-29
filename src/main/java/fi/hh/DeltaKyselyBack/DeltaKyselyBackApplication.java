@@ -56,9 +56,9 @@ public class DeltaKyselyBackApplication {
 
 			vastausRepositorio.save(vastaus1);
 			
-			Monivalinta vaihtoehto1 = new Monivalinta("sininen", kysymys1, vastaus1);
+			//Monivalinta vaihtoehto1 = new Monivalinta("sininen", kysymys1, vastaus1);
 
-			monivalintaRepo.save(vaihtoehto1);
+			//monivalintaRepo.save(vaihtoehto1);
 
 
 
