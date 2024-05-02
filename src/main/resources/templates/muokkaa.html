@@ -7,11 +7,41 @@
 </head>
 <body>
 
-	<form th:action="@{/muokkaa/{kyselyId}(kyselyId=${kysely.kyselyId})}" method="post">
+	<!-- <form th:action="@{/muokkaaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}" method="post">
     <input type="hidden" th:name="kyselyId" th:value="${kysely.kyselyId}" />
     <input type="text" th:name="otsikko" th:value="${kysely.otsikko}" />
 </form>
 
+  <form th:action="@{/muokkaaKyssari/{kysymysId}(kysymysId=${kysymys.kysymysId})}" method="post">
+        <input type="hidden" th:name="kysymysId" th:value="${kysymys.kysymysId}" />
+        <input type="text" th:name="kysymysTeksti" th:value="${kysymys.kysymysTeksti}" placeholder="Question Text" />
+   </form> 
+   
+ 	<label for="kyselyId">Otsikko:</label>
+    <input type="text" id="kysely" name="kyselyId" th:value="${kysely.kyselyId}" /> <br> <br>
+    <label for="kysymysID">Kysymykset:</label>
+    <input type="text" id="kysymys" name="kysymysId" th:value="{kysymys.kysymysTeksti}" /> <br> <br>
+ -->
+ 
+ <form th:action="@{/save}" method="post">
+    <label for="kyselyId">Kysely ID:</label>
+    <input type="text" id="kyselyId" name="kyselyId" th:value="${kysely.id}" />
+    <br>
+    <label for="kyselyOtsikko">Kysely Otsikko:</label>
+    <input type="text" id="kyselyOtsikko" name="kyselyOtsikko" th:value="${kysely.otsikko}" />
+    <br>
+    <!-- Add more input fields as needed -->
+    
+    <label for="kysymysId">Kysymys ID:</label>
+    <input type="text" id="kysymysId" name="kysymysId" th:value="${kysymys.id}" />
+    <br>
+    <label for="kysymysTeksti">Kysymys Teksti:</label>
+    <input type="text" id="kysymysTeksti" name="kysymysTeksti" th:value="${kysymys.teksti}" />
+    <br>
+    <!-- Add more input fields as needed -->
+
+    <button type="submit">Save</button>
+</form>
 
 
 

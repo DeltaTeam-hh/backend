@@ -59,13 +59,23 @@ public class KyselyController {
 	    return "redirect:/etusivu";
 	}
 
-	@GetMapping("/muokkaa/{kyselyId}")
-	public String muokkaa(@PathVariable("kyselyId") Long kyselyId, Model model) {
-	    Kysely kysely = kyselyRepositorio.findById(kyselyId)
-	        .orElseThrow(() -> new IllegalArgumentException("Invalid Kysely ID: " + kyselyId));
+	@GetMapping("/muokkaa/{id}")
+	public String muokkaa(@PathVariable("id") Long id, Model model) {
+	    Kysely kysely = kyselyRepositorio.findById(id)
+	        .orElseThrow(() -> new IllegalArgumentException("Invalid Kysely ID: " + id));
 	    model.addAttribute("kysely", kysely);
+
+	    Kysymys kysymys = kysymysRepositorio.findById(id)
+	        .orElseThrow(() -> new IllegalArgumentException("Invalid Kysymys ID: " + id));
+	    model.addAttribute("kysymys", kysymys);
+
 	    return "muokkaa";
 	}
+
+
+
+
+
 
 	
 	 @PostMapping("/savekysely")

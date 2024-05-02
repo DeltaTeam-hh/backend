@@ -77,6 +77,16 @@ public class KysymysController {
      * return "redirect:/kysely"; // kysely.html
      * }
      */
+    
+    
+ /*   @GetMapping("/muokkaaKyssari/{kysymysId}")
+    public String muokkaaKyssari(@PathVariable("kysymysId") Long kysymysId, Model model) {
+        Kysymys kysymys = kysymysRepositorio.findById(kysymysId)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid Kysymys ID: " + kysymysId));
+        model.addAttribute("kysymys", kysymys);
+        return "muokkaa"; 
+    }
+*/
 
     @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
     public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
