@@ -1,18 +1,13 @@
-
 package fi.hh.DeltaKyselyBack.web;
-
-
 
 import java.util.ArrayList;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
@@ -22,14 +17,11 @@ import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Monivalinta;
 import fi.hh.DeltaKyselyBack.domain.MonivalintaRepo;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @Controller
 public class KysymysController {
@@ -38,65 +30,60 @@ public class KysymysController {
 
     @Autowired
     private KyselyRepositorio kyselyRepositorio;
-    
+
     @Autowired
     private MonivalintaRepo monivalintaRepo;
 
     @RequestMapping(value = "/addmonivalinta")
-	public String addMonivalinta(Model model) {
-		model.addAttribute("monivalinta", new Monivalinta());
-		return "addmonivalinta";
-	}
-    
-    
-   /* @PostMapping("/savemonivalinnat")
-    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
-        for (String kysymysTeksti : kysymysTekstit) {
-            Kysymys kysymys = new Kysymys();
-            kysymys.setKysymysTeksti(kysymysTeksti);
-            kysymysRepositorio.save(kysymys);
-        }
-        
-        Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
-        List<Kysymys> savedKysymykset = new ArrayList<>();
-        savedKysymyksetIterable.forEach(savedKysymykset::add);
-        
-        model.addAttribute("kysymykset", savedKysymykset);
-        
-        return "redirect:/addKysely";
+    public String addMonivalinta(Model model) {
+        model.addAttribute("monivalinta", new Monivalinta());
+        return "addmonivalinta";
     }
-   
 
-    private KyselyRepositorio kyselyRepositorio;
+    /*
+     * @PostMapping("/savemonivalinnat")
+     * public String saveQuestions(@RequestParam("kysymysTeksti") List<String>
+     * kysymysTekstit, Model model) {
+     * for (String kysymysTeksti : kysymysTekstit) {
+     * Kysymys kysymys = new Kysymys();
+     * kysymys.setKysymysTeksti(kysymysTeksti);
+     * kysymysRepositorio.save(kysymys);
+     * }
+     * 
+     * Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
+     * List<Kysymys> savedKysymykset = new ArrayList<>();
+     * savedKysymyksetIterable.forEach(savedKysymykset::add);
+     * 
+     * model.addAttribute("kysymykset", savedKysymykset);
+     * 
+     * return "redirect:/addKysely";
+     * }
+     * 
+     * 
+     * private KyselyRepositorio kyselyRepositorio;
+     * 
+     * // Kysymyksen lisäys
+     * /* @GetMapping("/addKysely")
+     * public String addKysymys(Model model) {
+     * model.addAttribute("kysymykset", kysymysRepositorio.findAll());
+     * return "addKysely"; // kysely.html
+     * }
+     */
 
-    // Kysymyksen lisäys
-   /* @GetMapping("/addKysely")
-    public String addKysymys(Model model) {
-        model.addAttribute("kysymykset", kysymysRepositorio.findAll());
-        return "addKysely"; // kysely.html
-    }*/
+    /*
+     * @GetMapping("/addKysymys")
+     * public String addKysely(Model model) {
+     * model.addAttribute("kysymys", new Kysymys());
+     * return "redirect:/kysely"; // kysely.html
+     * }
+     */
 
-
-    /*@GetMapping("/addKysymys")
-    public String addKysely(Model model) {
-        model.addAttribute("kysymys", new Kysymys());
-        return "redirect:/kysely"; // kysely.html
-    }*/
-
-    
     @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
     public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
         kysymysRepositorio.deleteById(kysymysId);
         return "redirect:/showKysely/" + kyselyId;
 
-        
-       
     }
-    
-
-    
-
-
 
     @PostMapping("/savekysymykset")
     public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
@@ -105,15 +92,14 @@ public class KysymysController {
             kysymys.setKysymysTeksti(kysymysTeksti);
             kysymysRepositorio.save(kysymys);
         }
-        
+
         Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
         List<Kysymys> savedKysymykset = new ArrayList<>();
         savedKysymyksetIterable.forEach(savedKysymykset::add);
-        
+
         model.addAttribute("kysymykset", savedKysymykset);
-        
+
         return "redirect:/addKysely";
     }
-    
 
 }

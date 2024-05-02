@@ -1,4 +1,3 @@
-
 package fi.hh.DeltaKyselyBack.web;
 
 
@@ -67,8 +66,6 @@ public class KyselyController {
 	    model.addAttribute("kysely", kysely);
 	    return "muokkaa";
 	}
-
-
 
 	
 	 @PostMapping("/savekysely")
