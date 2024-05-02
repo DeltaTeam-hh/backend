@@ -93,18 +93,9 @@ public class KysymysController {
        
     }
     
-<<<<<<< HEAD
-=======
-    
-    @GetMapping("/muokkaa/{id}")
-    public String muokkaa(@PathVariable("id") Long kysymysId, @PathVariable("kyselyId") Long kyselyId, Model model) {
-    	Kysely kysely = kyselyRepositorio.findById(kyselyId).orElseThrow(() -> new IllegalArgumentException("Invalid kysely Id:" + kyselyId));
-	    model.addAttribute("kysely", kysely);
-	       return "redirect:/showKysely/" + kyselyId;
-        
 
-    }
->>>>>>> aa8e0615dc5a9d7277ec89eb6c50470a113a49ab
+    
+
 
 
     @PostMapping("/savekysymykset")
