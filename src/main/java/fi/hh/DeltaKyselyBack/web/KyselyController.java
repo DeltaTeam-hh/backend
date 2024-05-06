@@ -78,20 +78,36 @@ public class KyselyController {
 
 
 	
-	 @PostMapping("/savekysely")
-	    public String save(Kysely kysely, @RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
-	        kyselyRepositorio.save(kysely);
-	        
-	        for (String kysymysTeksti : kysymysTekstit) {
-	            Kysymys kysymys = new Kysymys();
-	            kysymys.setKysymysTeksti(kysymysTeksti);
-	            kysymys.setKysely(kysely);  // Set the Kysely for each Kysymys
-	            kysymysRepositorio.save(kysymys);
+	@PostMapping("/savekysely")
+	public String saveKysely(
+	    Kysely kysely,
+	    @RequestParam(value = "kysymysId", required = false) List<Long> kysymysIds,
+	    @RequestParam(value = "kysymysTeksti", required = true) List<String> kysymysTekstit
+	) {
+	    Kysely savedKysely = kyselyRepositorio.save(kysely);
+
+	    if (kysymysTekstit != null) {
+	        for (int i = 0; i < kysymysTekstit.size(); i++) {
+	            Long kysymysId = (kysymysIds != null && i < kysymysIds.size()) ? kysymysIds.get(i) : null;
+	            String kysymysTeksti = kysymysTekstit.get(i);
+
+	            if (kysymysId != null && kysymysRepositorio.existsById(kysymysId)) {
+	                Kysymys existingKysymys = kysymysRepositorio.findById(kysymysId).get();
+	                existingKysymys.setKysymysTeksti(kysymysTeksti);
+	                kysymysRepositorio.save(existingKysymys);
+	            } else {
+	                Kysymys newKysymys = new Kysymys();
+	                newKysymys.setKysymysTeksti(kysymysTeksti);
+	                newKysymys.setKysely(savedKysely);
+	                kysymysRepositorio.save(newKysymys);
+	            }
 	        }
-	        
-	        return "redirect:etusivu";
 	    }
-	
+
+	    return "redirect:/etusivu";
+	}
+
+
 	
 	   
 	
