@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etusivu</title>
+    <!-- <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+   --> <title>Etusivu</title>
 </head>
 <body>
 
@@ -63,7 +65,7 @@
     <br>
     <div style="display: inline-block; padding-left: 720px">
         <form th:action="@{/addKysely}" method="post">
-            <input type="submit" value="Lisää kysely" class="btn btn-sm btn-danger"/>
+            <input type="submit" value="Lisää kysely" class="btn btn-sm btn-success"/>
         </form>
     </div>
     <br><br>

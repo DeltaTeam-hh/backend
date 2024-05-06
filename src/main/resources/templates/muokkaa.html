@@ -24,14 +24,13 @@
         <!-- Editable fields for existing questions -->
         <label for="kysymykset">Kysymykset:</label>
         <div id="kysymykset">
-  <!-- In muokkaa.html, ensure delete button has correct URL structure -->
-<th:block th:each="kysymys : ${kysely.kysymykset}">
-    <input type="text" name="kysymysTeksti" th:value="${kysymys.kysymysTeksti}" />
-    <!-- Delete button with correct URL structure -->
-    <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}" 
-       class="btn btn-danger">Poista</a>
-    <br>
-</th:block>
+        
+	<th:block th:each="kysymys : ${kysely.kysymykset}">
+	    <input type="text" name="kysymysTeksti" th:value="${kysymys.kysymysTeksti}" />
+	    <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}" 
+	       class="btn btn-danger">Poista</a>
+	    <br>
+	</th:block>
 
                 <br>
             </th:block>

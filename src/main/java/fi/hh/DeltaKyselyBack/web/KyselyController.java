@@ -83,6 +83,7 @@ public class KyselyController {
 
 
 
+	
 
 
 
@@ -128,9 +129,8 @@ public class KyselyController {
 	         List<Kysymys> kysymykset = kysymysRepositorio.findByKyselyId(kysely.getKyselyId()); // Assuming Kysymys has a kyselyId field
 	         model.addAttribute("kysely", kysely);
 	         model.addAttribute("kysymykset", kysymykset);
-	         return "showKysely"; // Create a new Thymeleaf template named showKysely.html
+	         return "showKysely"; 
 	     } else {
-	         // Handle error - Kysely not found
 	         return "redirect:/etusivu";
 	     }
 	 }
