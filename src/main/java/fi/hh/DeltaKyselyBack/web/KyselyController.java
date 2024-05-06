@@ -60,16 +60,25 @@ public class KyselyController {
 	}
 
 	@GetMapping("/muokkaa/{id}")
-	public String muokkaa(@PathVariable("id") Long id, Model model) {
-	    Kysely kysely = kyselyRepositorio.findById(id)
-	        .orElseThrow(() -> new IllegalArgumentException("Invalid Kysely ID: " + id));
+	public String muokkaa(@PathVariable("id") Long kyselyId, Model model) {
+	    Optional<Kysely> kyselyOptional = kyselyRepositorio.findById(kyselyId);
+	    
+	    if (!kyselyOptional.isPresent()) {
+	        return "redirect:/etusivu"; 
+	    }
+	    
+	    Kysely kysely = kyselyOptional.get();
 	    model.addAttribute("kysely", kysely);
 
-	    Kysymys kysymys = kysymysRepositorio.findById(id)
-	        .orElseThrow(() -> new IllegalArgumentException("Invalid Kysymys ID: " + id));
-	    model.addAttribute("kysymys", kysymys);
+	    List<Kysymys> kysymykset = kysymysRepositorio.findByKysely(kysely);
+	    
+	    if (kysymykset.isEmpty()) {
+	        model.addAttribute("noQuestions", true);
+	    }
+	    
+	    model.addAttribute("kysymykset", kysymykset);
 
-	    return "muokkaa";
+	    return "muokkaa"; 
 	}
 
 
