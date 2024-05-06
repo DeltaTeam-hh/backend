@@ -89,11 +89,12 @@ public class KysymysController {
 */
 
     @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
-    public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
+    public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, 
+                                @PathVariable("kyselyId") Long kyselyId) {
         kysymysRepositorio.deleteById(kysymysId);
-        return "redirect:/showKysely/" + kyselyId;
-
+        return "redirect:/muokkaa/" + kyselyId; 
     }
+
 
     @PostMapping("/savekysymykset")
     public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {

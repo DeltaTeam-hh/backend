@@ -7,12 +7,12 @@
 </head>
 <body>
 
-<div style="display: flex; align-items: center; justify-content: center;">
+<div style="display: flex; align-items: center; justify-content: center; padding-left: 110px">
 	<h1><p style="padding-right: 50px;">Muokkaa kysely</p></h1>
   <button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Takaisin etusivulle</button>
 </div>
 
-    <div style="display: flex; align-items: center; justify-content: center;">
+    <div style="display: flex; align-items: center; justify-content: center; padding-right: 50px">
     <form th:action="@{/savekysely}" method="post">
         <input type="hidden" name="kyselyId" th:value="${kysely.kyselyId}" />
 
@@ -24,10 +24,15 @@
         <!-- Editable fields for existing questions -->
         <label for="kysymykset">Kysymykset:</label>
         <div id="kysymykset">
-            <th:block th:each="kysymys, iterStat : ${kysely.kysymykset}">
-                <input type="hidden" name="kysymysId" th:value="${kysymys.kysymysId}" /> <!-- Hidden ID for question -->
-                <input type="text" name="kysymysTeksti" th:value="${kysymys.kysymysTeksti}" placeholder="Kysymys Teksti" required />
-                <button type="button" th:onclick="'deleteQuestion(' + ${kysymys.kysymysId} + ')'" >Poista</button>
+  <!-- In muokkaa.html, ensure delete button has correct URL structure -->
+<th:block th:each="kysymys : ${kysely.kysymykset}">
+    <input type="text" name="kysymysTeksti" th:value="${kysymys.kysymysTeksti}" />
+    <!-- Delete button with correct URL structure -->
+    <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}" 
+       class="btn btn-danger">Poista</a>
+    <br>
+</th:block>
+
                 <br>
             </th:block>
         </div>
