@@ -1,8 +1,6 @@
 
 package fi.hh.DeltaKyselyBack.web;
 
-
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-
 import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 
@@ -21,105 +18,125 @@ import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Monivalinta;
 import fi.hh.DeltaKyselyBack.domain.MonivalintaRepo;
-
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @Controller
 public class KysymysController {
-    @Autowired
-    private KysymysRepositorio kysymysRepositorio;
+	@Autowired
+	private KysymysRepositorio kysymysRepositorio;
 
-    @Autowired
-    private KyselyRepositorio kyselyRepositorio;
-    
-    @Autowired
-    private MonivalintaRepo monivalintaRepo;
+	@Autowired
+	private KyselyRepositorio kyselyRepositorio;
 
-    @RequestMapping(value = "/addmonivalinta")
-	public String addMonivalinta(Model model) {
-		model.addAttribute("monivalinta", new Monivalinta());
-		return "addmonivalinta";
+	@Autowired
+	private MonivalintaRepo monivalintaRepo;
+
+	@GetMapping("/addmonivalinta")
+	public String addMonivalinta(Model model, HttpSession session) {
+	    // Retrieve kyselyId from wherever it's available (e.g., query creation process)
+	    Long kyselyId = (Long) session.getAttribute("kyselyId");
+	    if (kyselyId == null) {
+	        // Handle error: kyselyId not found in session
+	    }
+	    model.addAttribute("kyselyId", kyselyId);
+	    return "addmonivalinta";
 	}
-    
-    
-   /* @PostMapping("/savemonivalinnat")
-    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
-        for (String kysymysTeksti : kysymysTekstit) {
-            Kysymys kysymys = new Kysymys();
-            kysymys.setKysymysTeksti(kysymysTeksti);
-            kysymysRepositorio.save(kysymys);
-        }
-        
-        Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
-        List<Kysymys> savedKysymykset = new ArrayList<>();
-        savedKysymyksetIterable.forEach(savedKysymykset::add);
-        
-        model.addAttribute("kysymykset", savedKysymykset);
-        
-        return "redirect:/addKysely";
-    }
-   
+	
+	
 
-    private KyselyRepositorio kyselyRepositorio;
+	
+	@PostMapping("/savemonivalinnat")
+	public String saveMonivalinnat(@RequestParam("kysymysTeksti") String kysymysTeksti,
+	                               @RequestParam("options") List<String> options,
+	                               HttpSession session,
+	                               Model model) {
+	    // Retrieve the kyselyId from session
+	    Long kyselyId = (Long) session.getAttribute("kyselyId");
 
-    // Kysymyksen lisäys
-   /* @GetMapping("/addKysely")
-    public String addKysymys(Model model) {
-        model.addAttribute("kysymykset", kysymysRepositorio.findAll());
-        return "addKysely"; // kysely.html
-    }*/
+	    // Check if kyselyId is null or invalid
+	    if (kyselyId == null) {
+	        // Handle error: kyselyId not found in session
+	    }
 
+	    // Retrieve the Kysely object using the kyselyId
+	    Kysely kysely = kyselyRepositorio.findById(kyselyId).orElse(null);
 
-    /*@GetMapping("/addKysymys")
-    public String addKysely(Model model) {
-        model.addAttribute("kysymys", new Kysymys());
-        return "redirect:/kysely"; // kysely.html
-    }*/
+	    // Check if kysely is null or invalid
+	    if (kysely == null) {
+	        // Handle error: Kysely not found
+	    }
 
-    
-    @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
-    public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, @PathVariable("kyselyId") Long kyselyId) {
-        kysymysRepositorio.deleteById(kysymysId);
-        return "redirect:/showKysely/" + kyselyId;
+	    // Save the monivalinta options and existing questions
+	    Kysymys kysymys = new Kysymys();
+	    kysymys.setKysymysTeksti(kysymysTeksti);
+	    kysymys.setTyyppi("Monivalinta");
+	    kysymys.setKysely(kysely);
+	    kysymysRepositorio.save(kysymys);
 
-        
-       
-    }
-    
-    
-    @GetMapping("/muokkaa/{id}")
-    public String muokkaa(@PathVariable("id") Long kysymysId, @PathVariable("kyselyId") Long kyselyId, Model model) {
-    	Kysely kysely = kyselyRepositorio.findById(kyselyId).orElseThrow(() -> new IllegalArgumentException("Invalid kysely Id:" + kyselyId));
-	    model.addAttribute("kysely", kysely);
-	       return "redirect:/showKysely/" + kyselyId;
-        
+	    for (String option : options) {
+	        Monivalinta monivalinta = new Monivalinta(kysymys, null, option);
+	        monivalintaRepo.save(monivalinta);
+	    }
 
-    }
+	    // Fetch existing questions from your repository
+	    Iterable<Kysymys> existingQuestionsIterable = kysymysRepositorio.findAll();
+
+	    // Convert Iterable to List
+	    List<Kysymys> existingQuestions = new ArrayList<>();
+	    existingQuestionsIterable.forEach(existingQuestions::add);
+
+	    // Add existing questions to the model
+	    model.addAttribute("kysymykset", existingQuestions);
+
+	    // Add a dummy attribute to satisfy Thymeleaf's expectations
+	    model.addAttribute("kysely", new Kysely()); // You can use any object here
+
+	    // Return the same view to continue adding questions
+	    return "addKysely";
+	}
 
 
-    @PostMapping("/savekysymykset")
-    public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
-        for (String kysymysTeksti : kysymysTekstit) {
-            Kysymys kysymys = new Kysymys();
-            kysymys.setKysymysTeksti(kysymysTeksti);
-            kysymysRepositorio.save(kysymys);
-        }
-        
-        Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
-        List<Kysymys> savedKysymykset = new ArrayList<>();
-        savedKysymyksetIterable.forEach(savedKysymykset::add);
-        
-        model.addAttribute("kysymykset", savedKysymykset);
-        
-        return "redirect:/addKysely";
-    }
-    
+
+
+	  @GetMapping("/poistaKyssari/{kysymysId}/{kyselyId}")
+	    public String poistaKysymys(@PathVariable("kysymysId") Long kysymysId, 
+	                                @PathVariable("kyselyId") Long kyselyId) {
+	        kysymysRepositorio.deleteById(kysymysId);
+	        return "redirect:/muokkaa/" + kyselyId; 
+	    }
+
+	@GetMapping("/muokkaa/{id}")
+	public String muokkaa(@PathVariable("id") Long kysymysId, @PathVariable("kyselyId") Long kyselyId, Model model) {
+		Kysely kysely = kyselyRepositorio.findById(kyselyId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid kysely Id:" + kyselyId));
+		model.addAttribute("kysely", kysely);
+		return "redirect:/showKysely/" + kyselyId;
+
+	}
+
+
+	@PostMapping("/savekysymykset")
+	public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
+		for (String kysymysTeksti : kysymysTekstit) {
+			Kysymys kysymys = new Kysymys();
+			kysymys.setKysymysTeksti(kysymysTeksti);
+			kysymys.setTyyppi("Tekstikysymys");
+			kysymysRepositorio.save(kysymys);
+		}
+
+		Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
+		List<Kysymys> savedKysymykset = new ArrayList<>();
+		savedKysymyksetIterable.forEach(savedKysymykset::add);
+
+		model.addAttribute("kysymykset", savedKysymykset);
+
+		return "redirect:/addKysely";
+	}
 
 }

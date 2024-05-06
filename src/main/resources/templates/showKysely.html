@@ -15,11 +15,11 @@
 
 <table class="table table-striped" style="padding-left: 735px">
     <tr>
-        <th>Kysymys</th>
+        <th>Kysymykset</th>
     </tr>
     <tr th:each="kysymys : ${kysely.kysymykset}">
         <td th:text="${kysymys.kysymysTeksti}"></td>
-        <td>
+        <td th:text="${kysymys.tyyppi}"></td>
         <a th:href="@{/poistaKyssari/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Poista</a>
      	<span>|</span>
      	<a th:href="@{/muokkaa/{kysymysId}/{kyselyId}(kysymysId=${kysymys.kysymysId}, kyselyId=${kysely.kyselyId})}"  class="btn btn-sm btn-danger">Muokkaa</a>

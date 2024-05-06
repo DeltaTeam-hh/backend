@@ -23,6 +23,7 @@ import fi.hh.DeltaKyselyBack.domain.Kysely;
 import fi.hh.DeltaKyselyBack.domain.KyselyRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -47,6 +48,20 @@ public class KyselyController {
        
     }
 	
+
+	
+	@GetMapping("/addKysely")
+	public String getAddKysely(Model model, HttpSession session) {
+	    Kysely kysely = new Kysely(); // Create a new Kysely object
+	    kysely = kyselyRepositorio.save(kysely);
+	    model.addAttribute("kysely", kysely); // Add it to the model
+	    
+	 // Set the kyselyId in the session
+	    session.setAttribute("kyselyId", kysely.getKyselyId());
+	    
+	    return "addKysely"; // Return the view name
+	}
+	
 	@PostMapping("/addKysely")
 	public String addKysely(Model model) {
 	    model.addAttribute("kysely", new Kysely());
@@ -54,21 +69,41 @@ public class KyselyController {
 	}
 	
 
-	@GetMapping("/poistaKysely/{id}")
-	public String poistaKysely(@PathVariable("id") Long kyselyId, Model model) {
-	    kyselyRepositorio.deleteById(kyselyId);
-	    return "redirect:/etusivu";
+	@GetMapping("/muokkaa/{id}")
+	public String muokkaa(@PathVariable("id") Long kyselyId, Model model) {
+	    Optional<Kysely> kyselyOptional = kyselyRepositorio.findById(kyselyId);
+	    
+	    if (!kyselyOptional.isPresent()) {
+	        return "redirect:/etusivu"; 
+	    }
+	    
+	    Kysely kysely = kyselyOptional.get();
+	    model.addAttribute("kysely", kysely);
+
+	    List<Kysymys> kysymykset = kysymysRepositorio.findByKysely(kysely);
+	    
+	    if (kysymykset.isEmpty()) {
+	        model.addAttribute("noQuestions", true);
+	    }
+	    
+	    model.addAttribute("kysymykset", kysymykset);
+
+	    return "muokkaa"; 
 	}
-
-
 	
 	 @PostMapping("/savekysely")
-	    public String save(Kysely kysely, @RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
+	    public String save(Kysely kysely, @RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model, HttpSession session) {
+		 
+		 //tähän koodia
+		 Long kyselyId = (Long) session.getAttribute("kyselyId");
+		 kysely.setKyselyId(kyselyId);
+		 
 	        kyselyRepositorio.save(kysely);
 	        
 	        for (String kysymysTeksti : kysymysTekstit) {
 	            Kysymys kysymys = new Kysymys();
 	            kysymys.setKysymysTeksti(kysymysTeksti);
+	            kysymys.setTyyppi("Tekstikysymys");
 	            kysymys.setKysely(kysely);  // Set the Kysely for each Kysymys
 	            kysymysRepositorio.save(kysymys);
 	        }

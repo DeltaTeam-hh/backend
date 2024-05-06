@@ -8,35 +8,36 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/submit}" method="post">
-        <div>
-            <label>Question:</label>
-            <span th:text="${question}"></span>
-        </div>
-        <div id="optionsContainer">
-            <label>Select one answer:</label>
-            <select name="selectedAnswer">
-                <option th:each="option : ${options}" th:value="${option}" th:text="${option}"></option>
-            </select>
-        </div>
-        <button type="button" onclick="addOption()">Add Option</button>
-        <input type="submit" value="Submit">
-    </form>
+<form action="#" th:action="@{/savemonivalinnat}" method="post">
+    <div class="kysymys">
+        <label>Kysymysteksti:</label>
+        <input type="text" name="kysymysTeksti" required>
+    </div>
+    <div id="optionsContainer">
+        <label>Vastausvaihtoehdot:</label>
+        <input type="text" name="options" required>
+        <button type="button" onclick="addOption()">Lisää vastausvaihtoehto</button>
+    </div>
+    <!-- Hidden input field to include kyselyId -->
+    <input type="hidden" name="kyselyId" th:value="${kyselyId}">
+    <button type="submit">Tallenna kysymys</button>
+</form>
     
     <script>
-		
-	function addOption() {
-    var optionsContainer = document.getElementById('optionsContainer');
-    var newOptionInput = document.createElement('input');
-    newOptionInput.type = 'text';
-    newOptionInput.name = 'newOption';
-    newOptionInput.placeholder = 'New Option';
-    optionsContainer.appendChild(newOptionInput);
-}
-		
-	</script>
+        function addOption() {
+            var optionsContainer = document.getElementById('optionsContainer');
+            var newOptionInput = document.createElement('input');
+            newOptionInput.type = 'text';
+            newOptionInput.name = 'options';
+            newOptionInput.placeholder = 'New Option';
+            optionsContainer.appendChild(newOptionInput);
+        }
+    </script>
 
 </body>
 </html>
 
-</html>
+
+
+
+
