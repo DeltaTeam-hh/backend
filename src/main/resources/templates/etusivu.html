@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
     <title>Etusivu</title>
 </head>
 <body>
@@ -21,9 +23,9 @@
             </form>
             <td>
 		<a th:href="@{/poistaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Poista</a>
-      <!--  <span>|</span>
-		<a th:href="@{/muokkaaKyssari/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
-         -->
+      <span>|</span>
+		<a th:href="@{/muokkaa/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
+         
         </td>
     </tr>
 </table>
@@ -32,8 +34,10 @@
     <br>
     <br>
     <div style="display: inline-block; padding-left: 720px">
+
         <form th:action="@{/addKysely}" method="get">
             <input type="submit" value="Lisää kysely" class="btn btn-sm btn-danger"/>
+
         </form>
     </div>
     <br><br>

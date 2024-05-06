@@ -1,10 +1,8 @@
-
 package fi.hh.DeltaKyselyBack.web;
 
 import java.util.ArrayList;
 
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +16,9 @@ import fi.hh.DeltaKyselyBack.domain.Kysymys;
 import fi.hh.DeltaKyselyBack.domain.KysymysRepositorio;
 import fi.hh.DeltaKyselyBack.domain.Monivalinta;
 import fi.hh.DeltaKyselyBack.domain.MonivalintaRepo;
+
 import jakarta.servlet.http.HttpSession;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KysymysController {
 	@Autowired
 	private KysymysRepositorio kysymysRepositorio;
+
 
 	@Autowired
 	private KyselyRepositorio kyselyRepositorio;
@@ -47,7 +48,6 @@ public class KysymysController {
 	    model.addAttribute("kyselyId", kyselyId);
 	    return "addmonivalinta";
 	}
-	
 	
 
 	
@@ -111,32 +111,7 @@ public class KysymysController {
 	        return "redirect:/muokkaa/" + kyselyId; 
 	    }
 
-	@GetMapping("/muokkaa/{id}")
-	public String muokkaa(@PathVariable("id") Long kysymysId, @PathVariable("kyselyId") Long kyselyId, Model model) {
-		Kysely kysely = kyselyRepositorio.findById(kyselyId)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid kysely Id:" + kyselyId));
-		model.addAttribute("kysely", kysely);
-		return "redirect:/showKysely/" + kyselyId;
-
-	}
 
 
-	@PostMapping("/savekysymykset")
-	public String saveQuestions(@RequestParam("kysymysTeksti") List<String> kysymysTekstit, Model model) {
-		for (String kysymysTeksti : kysymysTekstit) {
-			Kysymys kysymys = new Kysymys();
-			kysymys.setKysymysTeksti(kysymysTeksti);
-			kysymys.setTyyppi("Tekstikysymys");
-			kysymysRepositorio.save(kysymys);
-		}
-
-		Iterable<Kysymys> savedKysymyksetIterable = kysymysRepositorio.findAll();
-		List<Kysymys> savedKysymykset = new ArrayList<>();
-		savedKysymyksetIterable.forEach(savedKysymykset::add);
-
-		model.addAttribute("kysymykset", savedKysymykset);
-
-		return "redirect:/addKysely";
-	}
 
 }
