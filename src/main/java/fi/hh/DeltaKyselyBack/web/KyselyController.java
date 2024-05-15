@@ -111,10 +111,12 @@ public class KyselyController {
 	            if (kysymysId != null && kysymysRepositorio.existsById(kysymysId)) {
 	                Kysymys existingKysymys = kysymysRepositorio.findById(kysymysId).get();
 	                existingKysymys.setKysymysTeksti(kysymysTeksti);
+	                existingKysymys.setTyyppi("Tekstikysymys");
 	                kysymysRepositorio.save(existingKysymys);
 	            } else {
 	                Kysymys newKysymys = new Kysymys();
 	                newKysymys.setKysymysTeksti(kysymysTeksti);
+	                newKysymys.setTyyppi("Tekstikysymys");
 	                newKysymys.setKysely(savedKysely);
 	                kysymysRepositorio.save(newKysymys);
 	            }

@@ -1,5 +1,57 @@
-
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisää monivalinta</title>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .options-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form action="#" th:action="@{/savemonivalinnat}" method="post">
+    <div class="form-group">
+        <label for="kysymysteksti">Kysymysteksti:</label>
+        <input type="text" id="kysymysteksti" name="kysymysTeksti" required>
+    </div>
+    
+    <div class="form-group options-container">
+        <label for="options">Vastausvaihtoehdot:</label>
+        <div id="optionsContainer">
+            <input type="text" name="options" required>
+        </div>
+        <button type="button" onclick="addOption()">Lisää vastausvaihtoehto</button>
+    </div>
+    
+    <input type="hidden" name="kyselyId" th:value="${kyselyId}">
+    <button type="submit">Tallenna kysymys</button>
+</form>
+
+<script>
+    function addOption() {
+        var optionsContainer = document.getElementById('optionsContainer');
+        var newOptionInput = document.createElement('input');
+        newOptionInput.type = 'text';
+        newOptionInput.name = 'options';
+        newOptionInput.placeholder = 'Uusi vaihtoehto';
+        optionsContainer.appendChild(newOptionInput);
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+<!--/* <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +71,7 @@
         <button type="button" onclick="addOption()">Lisää vastausvaihtoehto</button>
     </div>
     <!-- Hidden input field to include kyselyId -->
-    <input type="hidden" name="kyselyId" th:value="${kyselyId}">
+  <!--/*  <input type="hidden" name="kyselyId" th:value="${kyselyId}">
     <button type="submit">Tallenna kysymys</button>
 </form>
     
@@ -35,9 +87,5 @@
     </script>
 
 </body>
-</html>
-
-
-
-
+</html> */-->
 

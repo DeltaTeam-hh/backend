@@ -1,61 +1,91 @@
 
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kysely</title>
-</head>
-<body>
+    <style>
+        /* Keskittää kaikki elementit */
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .input-container {
+        display: flex;
+        align-items: center;
+    }
 
-<div style="display: flex; align-items: center; justify-content: center;">
-	<h1><p style="padding-right: 50px;">Tervetuloa kyselyyn!</p></h1>
-  <button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Takaisin etusivulle</button>
+    .input-container label {
+        width: 150px; /* Säädä tämä tarpeidesi mukaan */
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .input-container input {
+        flex: 1;
+    }
+    .button {
+  font: 13px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 2px solid #CCCCCC;
+  border-right: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  border-left: 2px solid #CCCCCC;
+}
+    </style>
+</head>
+<body class="centered">
+
+<h1>Tervetuloa kyselyyn!</h1>
+
+<!--<button onclick="window.location.href='/etusivu'" class="btn btn-sm btn-primary">Tallenna kysely</button> -->
+
+<div>
+	<p>(HUOM! Lisää monivalintakysymykset ensin)</p>
 </div>
 
+<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post">
 
-
-<form th:object="${kysely}" th:action="@{/savekysely}" action="#" method="post" style="padding-left: 575px; text-align: 10px; margin-right: 10px;">
-
+    <div class="input-container">
     <label for="otsikko">Otsikko:</label>
     <input type="text" id="otsikko" th:field="*{otsikko}" />
+</div>
 
-    <div style="clear: both; display: block; height: 10px;"></div>
-    
-    <!-- Input fields for the first Kysymys -->
-    <div class="kysymys">
-        <label>Kysymysteksti:</label>
-        <input type="text" name="kysymysTeksti" required>
-    </div>
-    
+<div style="clear: both; display: block; height: 10px;"></div>
+
+<!-- Input fields for the first Kysymys -->
+<div class="input-container kysymys">
+    <label for="kysymysTeksti">Kysymysteksti:</label>
+    <input type="text" id="kysymysTeksti" name="kysymysTeksti" required>
+</div>
+
     <!-- Container for additional Kysymys fields -->
     <div id="kysymyksetContainer"></div>
     <br>
- 
 
-  <div style="display: flex">   
     <!-- Button to add new question fields -->
-    <button type="button" id="addQuestionButton" style="margin-right: 10px;">Lisää uusi kysymys</button>
-
-    <br>
-
-  <br>
-
+    <button type="button" id="addQuestionButton">Lisää uusi kysymys</button>
     
+    <!-- Move the "Lisää monivalintakysymys" button next to "Lisää uusi kysymys" button -->
+    <a th:href="@{'/addmonivalinta?kyselyId=' + ${kysely.kyselyId}}" class="button">Lisää monivalintakysymys</a>
     
     <!-- Button to save all questions and Kysely -->
-    <button type="submit">Tallenna kysely</button>
-    </div>
+    <button type="submit">Tallenna kysely ja palaa etusivulle</button>
 </form>
 
 <div>
-<a th:href="@{'/addmonivalinta?kyselyId=' + ${kysely.kyselyId}}" class="btn btn-sm btn-primary">Lisää monivalintakysymys</a>
+    <h2>Tallennetut kysymykset</h2>
+    <ul class="list-unstyled">
+        <li th:each="kysymys : ${kysymykset}" th:text="${kysymys.kysymysTeksti}"></li>
+    </ul>
 </div>
-
-<ul>
-    <li th:each="kysymys : ${kysymykset}" th:text="${kysymys.kysymysTeksti}"></li>
-</ul>
 
 <script>
     document.getElementById('addQuestionButton').addEventListener('click', function() {
@@ -75,9 +105,5 @@
     });
 </script>
 
-
 </body>
 </html>
-
-</html>
-
