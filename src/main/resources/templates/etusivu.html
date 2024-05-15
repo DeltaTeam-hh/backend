@@ -4,45 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <title>Etusivu</title>
+	<style>
+    .kyselyn-nimi-row {
+        background-color: #f2f2f2;
+    
+
+  .kyselyn-nimi-row th:first-child {
+    border-bottom: none;
+}
+
+}
+
+
+
+</style>
+
+
 </head>
+
 <body>
 
-	
-	<h1><p style="text-align: center;">Kyselylista</p></h1>
+    <h1 style="text-align: center;">Kyselylista</h1>
 
-<table class="table table-striped">
-    <tr>
-        <th>Kyselyn nimi</th>
-    </tr>
-    <tr th:each="kysely : ${kyselyt}">
-        <td>
-            <form th:action="@{/showKysely/{id}(id=${kysely.kyselyId})}" method="get">
-                <button type="submit" th:text="${kysely.otsikko}" class="btn btn-link"></button>
-            </form>
-            <td>
-		<a th:href="@{/poistaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Poista</a>
-      <span>|</span>
-		<a th:href="@{/muokkaa/{kyselyId}(kyselyId=${kysely.kyselyId})}" class="btn btn-sm btn-danger">Muokkaa</a>
-         
-        </td>
-    </tr>
-</table>
-
-<p>
-    <br>
-    <br>
-    <div style="display: inline-block; padding-left: 720px">
-
-        <form th:action="@{/addKysely}" method="get">
-            <input type="submit" value="Lisää kysely" class="btn btn-sm btn-danger"/>
-
-        </form>
+    <div class="kyselyn-nimi-row">
+        <table class="table table-striped">
+            <tr>
+                <th>Kyselyn nimi</th>
+            </tr>
+            <tr th:each="kysely : ${kyselyt}">
+                <td>
+                    <form th:action="@{/showKysely/{id}(id=${kysely.kyselyId})}" method="get">
+                        <button type="submit" th:text="${kysely.otsikko}" class="btn btn-link"></button>
+                    </form>
+                </td>
+                <td>
+                    <a th:href="@{/poistaKysely/{kyselyId}(kyselyId=${kysely.kyselyId})}"
+                       class="btn btn-sm btn-danger">Poista</a>
+                    <span>|</span>
+                    <a th:href="@{/muokkaa/{kyselyId}(kyselyId=${kysely.kyselyId})}"
+                       class="btn btn-sm btn-danger">Muokkaa</a>
+                </td>
+            </tr>
+        </table>
     </div>
-    <br><br>
-</p>
+
+    <p>
+        <br>
+        <br>
+        <div style="display: inline-block; padding-left: 720px">
+            <form th:action="@{/addKysely}" method="post">
+                <input type="submit" value="Lisää kysely" class="btn btn-sm btn-success" />
+            </form>
+        </div>
+        <br><br>
+    </p>
 
 </body>
-</html>
 
+</html>
